@@ -264,7 +264,10 @@ export default function Header() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => router.push(user.role === 'FARM_EMPLOYEE' ? '/employee/settings' : user.role === 'FARM_MANAGER' ? '/manager/settings' : user.role === 'BUSINESS_OWNER' ? '/business-owner/settings' : '/system-owner/settings')}>
+              <DropdownMenuItem onClick={() => {
+                const baseRoute = user.role === 'SYSTEM_OWNER' ? '/system-owner' : user.role === 'BUSINESS_OWNER' ? '/business-owner' : user.role === 'FARM_MANAGER' ? '/manager' : '/employee';
+                router.push(`${baseRoute}?tab=settings`);
+              }}>
                 <UserIcon className="h-4 w-4 mr-2" />
                 Profile Settings
               </DropdownMenuItem>
