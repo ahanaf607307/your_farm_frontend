@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { axiosInstance } from '@/lib/axios';
 import { Farm, User, FarmType } from '@/types';
-import { formatCurrency } from '@/lib/utils';
+import { formatCurrency, cn } from '@/lib/utils';
 import DataTable from '@/components/shared/DataTable';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -30,15 +30,28 @@ import {
 export default function BusinessOwnerPage() {
   const queryClient = useQueryClient();
   const searchParams = useSearchParams();
-  const tabParam = searchParams.get('tab') as 'farms' | 'staff' | null;
-  const [activeTab, setActiveTab] = useState<'farms' | 'staff'>(tabParam === 'staff' ? 'staff' : 'farms');
+  const tabParam = searchParams.get('tab') as 'farms' | 'staff' | 'finances' | 'settings' | null;
+  const [activeTab, setActiveTab] = useState<'farms' | 'staff' | 'finances' | 'settings'>(
+    tabParam === 'staff' || tabParam === 'finances' || tabParam === 'settings' ? tabParam : 'farms'
+  );
 
   useEffect(() => {
     const tab = searchParams.get('tab');
-    if (tab === 'staff' || tab === 'farms') {
-      setActiveTab(tab);
+    if (tab === 'staff' || tab === 'farms' || tab === 'finances' || tab === 'settings') {
+      setActiveTab(tab as any);
+    } else {
+      setActiveTab('farms');
     }
   }, [searchParams]);
+
+
+
+  // Farm Settings Form State
+  const [bizGroupName, setBizGroupName] = useState('Vance Agricultural Group');
+  const [bizOwnerName, setBizOwnerName] = useState('Robert Vance');
+  const [bizEmail, setBizEmail] = useState('robert@vancefarms.com');
+  const [bizAddress, setBizAddress] = useState('Valley Region, Sector B');
+  const [bizTimezone, setBizTimezone] = useState('GMT+6');
   
   // Modals state
   const [farmModalOpen, setFarmModalOpen] = useState(false);
@@ -304,133 +317,75 @@ export default function BusinessOwnerPage() {
         </div>
       </div>
 
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="border bg-card">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs font-medium text-muted-foreground">Total Farms Managed</CardTitle>
-            <Layers className="h-4.5 w-4.5 text-emerald-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-mono">{farms.length}</div>
-            <p className="text-[10px] text-muted-foreground mt-1">
-              {farms.filter((f) => f.status === 'active').length} divisions actively logging details
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border bg-card">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs font-medium text-muted-foreground">Total Staff Employees</CardTitle>
-            <Users className="h-4.5 w-4.5 text-indigo-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-mono">
-              {users.filter((u) => u.role === 'FARM_EMPLOYEE').length}
-              <span className="text-xs font-normal text-muted-foreground ml-1">
-                (+{users.filter((u) => u.role === 'FARM_MANAGER').length} managers)
-              </span>
-            </div>
-            <p className="text-[10px] text-muted-foreground mt-1">
-              Active communication channels open
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border bg-card">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs font-medium text-muted-foreground">Monthly Operating Expense</CardTitle>
-            <DollarSign className="h-4.5 w-4.5 text-red-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-mono text-red-500">{formatCurrency(8450)}</div>
-            <p className="text-[10px] text-muted-foreground mt-1">
-              Includes feed bulk orders and staff payroll
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border bg-card">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs font-medium text-muted-foreground">Operating Net Profit</CardTitle>
-            <DollarSign className="h-4.5 w-4.5 text-emerald-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
-              {formatCurrency(6490)}
-            </div>
-            <p className="text-[10px] text-muted-foreground mt-1 flex items-center gap-1">
-              <TrendingUp className="h-3.5 w-3.5 text-emerald-500" /> +6.5% yield index growth
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Financial Chart & Statistics */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card className="border bg-card lg:col-span-2">
-          <CardHeader>
-            <CardTitle className="text-sm font-semibold">Income vs Expense Consolidation</CardTitle>
-            <CardDescription>Consolidated metrics across all active operations.</CardDescription>
-          </CardHeader>
-          <CardContent className="h-56 flex items-end justify-between px-6 pb-6 pt-4">
-            {[
-              { label: 'Jan', inc: 8, exp: 5 },
-              { label: 'Feb', inc: 9, exp: 6 },
-              { label: 'Mar', inc: 11, exp: 7 },
-              { label: 'Apr', inc: 10, exp: 8 },
-              { label: 'May', inc: 13, exp: 8 },
-              { label: 'Jun', inc: 15, exp: 8.4 },
-            ].map((d, idx) => (
-              <div key={idx} className="flex-1 flex flex-col items-center gap-1">
-                <div className="flex items-end justify-center space-x-1.5 w-full h-32">
-                  <div className="w-3 bg-emerald-500 rounded-t-sm" style={{ height: `${(d.inc / 18) * 100}%` }} />
-                  <div className="w-3 bg-red-400 rounded-t-sm" style={{ height: `${(d.exp / 18) * 100}%` }} />
-                </div>
-                <span className="text-[10px] text-zinc-500 mt-1">{d.label}</span>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-
-        {/* Farm Yield performance list */}
-        <Card className="border bg-card">
-          <CardHeader>
-            <CardTitle className="text-sm font-semibold">Yield Performance Rate</CardTitle>
-            <CardDescription>Efficiency rating by farm divisions.</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {[
-              { name: 'Vance Poultry Division', type: 'Poultry', rating: 94 },
-              { name: 'Vance Cattle Ranch', type: 'Cattle', rating: 88 },
-              { name: 'Vance Fish Estuary', type: 'Fish', rating: 76 },
-            ].map((f, i) => (
-              <div key={i} className="space-y-1.5">
-                <div className="flex justify-between items-center text-xs">
-                  <span className="font-bold text-foreground truncate max-w-[170px]">{f.name}</span>
-                  <span className="text-emerald-500 font-semibold">{f.rating}%</span>
-                </div>
-                <div className="w-full bg-muted h-2 rounded-full overflow-hidden">
-                  <div className="bg-emerald-500 h-full rounded-full" style={{ width: `${f.rating}%` }} />
-                </div>
-              </div>
-            ))}
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Tabs list for farms and staff registry */}
-      <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val as any)} className="w-full">
-        <TabsList className="grid grid-cols-2 max-w-sm mb-4">
-          <TabsTrigger value="farms">
-            Farms Registry
-          </TabsTrigger>
-          <TabsTrigger value="staff">
-            Workspace Staff
-          </TabsTrigger>
+      {/* Tabs list for farms, staff registry, finances, and settings */}
+      <Tabs
+        value={activeTab}
+        onValueChange={(val) => {
+          setActiveTab(val as any);
+          const params = new URLSearchParams(window.location.search);
+          if (val === 'farms') params.delete('tab');
+          else params.set('tab', val);
+          window.history.pushState(null, '', `${window.location.pathname}?${params.toString()}`);
+        }}
+        className="w-full"
+      >
+        <TabsList className="grid grid-cols-4 max-w-2xl mb-4">
+          <TabsTrigger value="farms">Farms Control</TabsTrigger>
+          <TabsTrigger value="staff">Employee Registry</TabsTrigger>
+          <TabsTrigger value="finances">Financial Reports</TabsTrigger>
+          <TabsTrigger value="settings">Farm Settings</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="farms">
+        <TabsContent value="farms" className="space-y-6">
+          {/* Summary Cards for Farms */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <Card className="border bg-card">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-xs font-medium text-muted-foreground">Total Farms Managed</CardTitle>
+                <Layers className="h-4.5 w-4.5 text-orange-500" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold font-mono">{farms.length}</div>
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  {farms.filter((f) => f.status === 'active').length} divisions actively logging details
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border bg-card">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-xs font-medium text-muted-foreground">Total Staff Employees</CardTitle>
+                <Users className="h-4.5 w-4.5 text-indigo-500" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold font-mono">
+                  {users.filter((u) => u.role === 'FARM_EMPLOYEE').length}
+                  <span className="text-xs font-normal text-muted-foreground ml-1">
+                    (+{users.filter((u) => u.role === 'FARM_MANAGER').length} managers)
+                  </span>
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  Active communication channels open
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border bg-card">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-xs font-medium text-muted-foreground">Operating Net Profit</CardTitle>
+                <DollarSign className="h-4.5 w-4.5 text-orange-500" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold font-mono text-orange-600 dark:text-orange-400">
+                  {formatCurrency(6490)}
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-1 flex items-center gap-1">
+                  <TrendingUp className="h-3.5 w-3.5 text-orange-500" /> +6.5% yield index growth
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
           <Card className="border bg-card">
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-semibold">Farms Registry</CardTitle>
@@ -454,7 +409,7 @@ export default function BusinessOwnerPage() {
           </Card>
         </TabsContent>
 
-        <TabsContent value="staff">
+        <TabsContent value="staff" className="space-y-6">
           <Card className="border bg-card">
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-semibold">Workspace Staff</CardTitle>
@@ -474,6 +429,169 @@ export default function BusinessOwnerPage() {
                   csvName="staff-registry"
                 />
               )}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="finances" className="space-y-6">
+          {/* Summary Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Card className="border bg-card">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-xs font-medium text-muted-foreground">Monthly Operating Expense</CardTitle>
+                <DollarSign className="h-4.5 w-4.5 text-red-500" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold font-mono text-red-500">{formatCurrency(8450)}</div>
+                <p className="text-[10px] text-muted-foreground mt-1">
+                  Includes feed bulk orders and staff payroll
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border bg-card">
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-xs font-medium text-muted-foreground">Operating Net Profit</CardTitle>
+                <DollarSign className="h-4.5 w-4.5 text-orange-500" />
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold font-mono text-orange-600 dark:text-orange-400">
+                  {formatCurrency(6490)}
+                </div>
+                <p className="text-[10px] text-muted-foreground mt-1 flex items-center gap-1">
+                  <TrendingUp className="h-3.5 w-3.5 text-orange-500" /> +6.5% yield index growth
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Financial Chart & Statistics */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <Card className="border bg-card lg:col-span-2">
+              <CardHeader>
+                <CardTitle className="text-sm font-semibold">Income vs Expense Consolidation</CardTitle>
+                <CardDescription>Consolidated metrics across all active operations.</CardDescription>
+              </CardHeader>
+              <CardContent className="h-56 flex items-end justify-between px-6 pb-6 pt-4">
+                {[
+                  { label: 'Jan', inc: 8, exp: 5 },
+                  { label: 'Feb', inc: 9, exp: 6 },
+                  { label: 'Mar', inc: 11, exp: 7 },
+                  { label: 'Apr', inc: 10, exp: 8 },
+                  { label: 'May', inc: 13, exp: 8 },
+                  { label: 'Jun', inc: 15, exp: 8.4 },
+                ].map((d, idx) => (
+                  <div key={idx} className="flex-1 flex flex-col items-center gap-1">
+                    <div className="flex items-end justify-center space-x-1.5 w-full h-32">
+                      <div className="w-3 bg-orange-500 rounded-t-sm" style={{ height: `${(d.inc / 18) * 100}%` }} />
+                      <div className="w-3 bg-red-400 rounded-t-sm" style={{ height: `${(d.exp / 18) * 100}%` }} />
+                    </div>
+                    <span className="text-[10px] text-zinc-500 mt-1">{d.label}</span>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+
+            {/* Farm Yield performance list */}
+            <Card className="border bg-card">
+              <CardHeader>
+                <CardTitle className="text-sm font-semibold">Yield Performance Rate</CardTitle>
+                <CardDescription>Efficiency rating by farm divisions.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {[
+                  { name: 'Vance Poultry Division', type: 'Poultry', rating: 94 },
+                  { name: 'Vance Cattle Ranch', type: 'Cattle', rating: 88 },
+                  { name: 'Vance Fish Estuary', type: 'Fish', rating: 76 },
+                ].map((f, i) => (
+                  <div key={i} className="space-y-1.5">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="font-bold text-foreground truncate max-w-[170px]">{f.name}</span>
+                      <span className="text-orange-500 font-semibold">{f.rating}%</span>
+                    </div>
+                    <div className="w-full bg-muted h-2 rounded-full overflow-hidden">
+                      <div className="bg-orange-500 h-full rounded-full" style={{ width: `${f.rating}%` }} />
+                    </div>
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Finance Transaction Logs */}
+          <Card className="border bg-card">
+            <CardHeader>
+              <CardTitle className="text-sm font-semibold">Transaction Logs</CardTitle>
+              <CardDescription>Recent operating expenses and income records.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {[
+                { source: 'Egg Sales Yield (Vance Poultry)', amount: 4800, date: '2026-06-12', type: 'income' },
+                { source: 'Bulk Chicken Feed Purchase', amount: -2500, date: '2026-06-10', type: 'expense' },
+                { source: 'Milk Yield Sales (Vance Cattle)', amount: 3500, date: '2026-06-08', type: 'income' },
+                { source: 'Livestock Vaccine Package Order', amount: -1200, date: '2026-06-05', type: 'expense' },
+              ].map((tx, idx) => (
+                <div key={idx} className="flex justify-between items-center text-xs p-3 border rounded-lg bg-muted/20">
+                  <div>
+                    <div className="font-bold">{tx.source}</div>
+                    <div className="text-3xs text-muted-foreground font-mono mt-0.5">{tx.date}</div>
+                  </div>
+                  <span className={cn('font-mono font-semibold', tx.type === 'income' ? 'text-orange-600 dark:text-orange-400' : 'text-red-500')}>
+                    {tx.type === 'income' ? '+' : ''}{formatCurrency(tx.amount)}
+                  </span>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="settings" className="space-y-6">
+          <Card className="border bg-card max-w-xl">
+            <CardHeader>
+              <CardTitle className="text-sm font-semibold">Farm & Group Settings</CardTitle>
+              <CardDescription>Configure business registration details, addresses, and timezones.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  toast.success('Farm configuration settings updated.');
+                }}
+                className="space-y-4 pt-2"
+              >
+                <div className="space-y-1.5">
+                  <Label htmlFor="set-biz-name">Business / Company Group Name</Label>
+                  <Input id="set-biz-name" value={bizGroupName} onChange={(e) => setBizGroupName(e.target.value)} />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="set-biz-owner">Owner Full Name</Label>
+                  <Input id="set-biz-owner" value={bizOwnerName} onChange={(e) => setBizOwnerName(e.target.value)} />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="set-biz-email">Contact Email Address</Label>
+                  <Input id="set-biz-email" type="email" value={bizEmail} onChange={(e) => setBizEmail(e.target.value)} />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="set-biz-addr">Primary Headquarters Address</Label>
+                  <Input id="set-biz-addr" value={bizAddress} onChange={(e) => setBizAddress(e.target.value)} />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="set-biz-tz">System Timezone</Label>
+                  <select
+                    id="set-biz-tz"
+                    value={bizTimezone}
+                    onChange={(e) => setBizTimezone(e.target.value)}
+                    className="w-full bg-background border border-input rounded-md px-3 py-1.5 text-sm"
+                  >
+                    <option value="GMT+6">Bangladesh (GMT+6)</option>
+                    <option value="EST">United States (EST)</option>
+                    <option value="GMT">Greenwich Mean Time (GMT)</option>
+                  </select>
+                </div>
+                <Button type="submit" className="bg-orange-600 hover:bg-orange-700 text-white w-full sm:w-auto">
+                  Save Settings Changes
+                </Button>
+              </form>
             </CardContent>
           </Card>
         </TabsContent>
@@ -526,7 +644,7 @@ export default function BusinessOwnerPage() {
               <Button type="button" variant="outline" onClick={() => setFarmModalOpen(false)}>
                 Cancel
               </Button>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white">
+              <Button type="submit" className="bg-orange-600 hover:bg-orange-700 text-white">
                 Register Farm
               </Button>
             </DialogFooter>
@@ -592,7 +710,7 @@ export default function BusinessOwnerPage() {
               <Button type="button" variant="outline" onClick={() => setStaffModalOpen(false)}>
                 Cancel
               </Button>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white">
+              <Button type="submit" className="bg-orange-600 hover:bg-orange-700 text-white">
                 Add Staff Member
               </Button>
             </DialogFooter>
@@ -602,3 +720,10 @@ export default function BusinessOwnerPage() {
     </div>
   );
 }
+
+
+
+
+
+
+

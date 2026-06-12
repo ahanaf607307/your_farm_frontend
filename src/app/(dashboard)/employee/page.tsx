@@ -46,6 +46,8 @@ export default function FarmEmployeePage() {
     const tab = searchParams.get('tab');
     if (tab) {
       setActiveTab(tab);
+    } else {
+      setActiveTab('tasks');
     }
   }, [searchParams]);
 
