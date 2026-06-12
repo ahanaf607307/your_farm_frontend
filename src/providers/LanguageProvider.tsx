@@ -242,17 +242,18 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   // Load language preference from local storage if available
   useEffect(() => {
-    const saved = localStorage.getItem('farmly_locale') as Locale;
+    const saved = localStorage.getItem('farmly_locale_v3') as Locale;
     if (saved === 'en' || saved === 'bn') {
       setLocale(saved);
     } else {
       setLocale('bn');
+      localStorage.setItem('farmly_locale_v3', 'bn');
     }
   }, []);
 
   const changeLocale = (newLocale: Locale) => {
     setLocale(newLocale);
-    localStorage.setItem('farmly_locale', newLocale);
+    localStorage.setItem('farmly_locale_v3', newLocale);
   };
 
   const t = (key: string): string => {

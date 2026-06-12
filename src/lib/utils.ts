@@ -7,7 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 
 // Helper for currency formatting
 export function formatCurrency(value: number): string {
-  const isBn = typeof window !== 'undefined' && localStorage.getItem('farmly_locale') === 'bn';
+  const isBn = typeof window !== 'undefined' && localStorage.getItem('farmly_locale_v3') === 'bn';
   if (isBn) {
     let roundedValue = value * 120;
     if (value === 49) roundedValue = 5000;
@@ -31,7 +31,7 @@ export function formatCurrency(value: number): string {
 export function formatDate(dateString: string): string {
   if (!dateString) return '';
   const date = new Date(dateString);
-  const isBn = typeof window !== 'undefined' && localStorage.getItem('farmly_locale') === 'bn';
+  const isBn = typeof window !== 'undefined' && localStorage.getItem('farmly_locale_v3') === 'bn';
   return date.toLocaleDateString(isBn ? 'bn-BD' : 'en-US', {
     month: 'short',
     day: 'numeric',

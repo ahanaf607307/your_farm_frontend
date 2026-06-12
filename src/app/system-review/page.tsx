@@ -73,7 +73,7 @@ export default function SystemReviewPage() {
     <div className="min-h-screen bg-background text-foreground transition-colors duration-300">
       {/* Header */}
       <header className="sticky top-0 z-40 w-full border-b bg-background/85 backdrop-blur-md">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="w-full max-w-[1700px] mx-auto px-4 md:px-12 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Link href="/" className="flex items-center space-x-2 hover:opacity-90">
               <div className="p-2 bg-orange-500/10 rounded-lg text-primary">
@@ -93,7 +93,7 @@ export default function SystemReviewPage() {
       </header>
 
       {/* Main Review Section */}
-      <main className="container mx-auto px-4 py-12 max-w-5xl">
+      <main className="w-full max-w-[1700px] mx-auto px-4 md:px-12 py-12">
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orange-500/20 bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-semibold">
             <Monitor className="h-4.5 w-4.5" /> Interactive Previews
