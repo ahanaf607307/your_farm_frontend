@@ -41,6 +41,8 @@ export default function FarmManagerPage() {
     const tab = searchParams.get('tab');
     if (tab) {
       setActiveTab(tab);
+    } else {
+      setActiveTab('animals');
     }
   }, [searchParams]);
 
@@ -539,13 +541,24 @@ export default function FarmManagerPage() {
       </div>
 
       {/* Main Content Tabs */}
-      <Tabs value={activeTab} onValueChange={(val) => setActiveTab(val)} className="w-full">
-        <TabsList className="grid grid-cols-5 max-w-2xl mb-4">
+      <Tabs
+        value={activeTab}
+        onValueChange={(val) => {
+          setActiveTab(val);
+          const params = new URLSearchParams(window.location.search);
+          if (val === 'animals') params.delete('tab');
+          else params.set('tab', val);
+          window.history.pushState(null, '', `${window.location.pathname}?${params.toString()}`);
+        }}
+        className="w-full"
+      >
+        <TabsList className="grid grid-cols-6 max-w-3xl mb-4">
           <TabsTrigger value="animals">Animals</TabsTrigger>
           <TabsTrigger value="medicines">Medicines</TabsTrigger>
           <TabsTrigger value="foods">Feeds</TabsTrigger>
           <TabsTrigger value="inventory">Finances</TabsTrigger>
           <TabsTrigger value="tasks">Tasks</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
 
         {/* Tab 1: Animals */}
@@ -681,6 +694,41 @@ export default function FarmManagerPage() {
                 addLabel="Dispatch Task"
                 csvName="tasks-history"
               />
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Tab 6: Settings */}
+        <TabsContent value="settings">
+          <Card className="border bg-card max-w-xl">
+            <CardHeader>
+              <CardTitle>Profile Settings</CardTitle>
+              <CardDescription>Update your personal details and account password.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  toast.success('Manager profile credentials updated successfully.');
+                }}
+                className="space-y-4 pt-2"
+              >
+                <div className="space-y-1.5">
+                  <Label htmlFor="mgr-name">Manager Name</Label>
+                  <Input id="mgr-name" defaultValue="David Carter" />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="mgr-email">Email Address</Label>
+                  <Input id="mgr-email" type="email" defaultValue="david@vancefarms.com" />
+                </div>
+                <div className="space-y-1.5 pt-2 border-t">
+                  <Label htmlFor="mgr-pass">New Password</Label>
+                  <Input id="mgr-pass" type="password" placeholder="••••••••" />
+                </div>
+                <Button type="submit" className="bg-orange-600 hover:bg-orange-700 text-white mt-4">
+                  Save Changes
+                </Button>
+              </form>
             </CardContent>
           </Card>
         </TabsContent>

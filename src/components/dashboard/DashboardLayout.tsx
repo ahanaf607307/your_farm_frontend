@@ -43,7 +43,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <Header />
         
         {/* Scrollable View Content */}
-        <main className="flex-1 overflow-y-auto px-4 py-6 md:p-8 bg-muted/40 dark:bg-zinc-950/30">
+        <main className="flex-1 overflow-y-auto px-4 py-6 md:p-8 bg-background">
           <div className="w-full space-y-6">
             {children}
           </div>
