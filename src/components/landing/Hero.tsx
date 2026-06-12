@@ -12,34 +12,28 @@ export default function Hero() {
 
   const heroImages = [
     {
-      url: '/heroImage/g1.png',
-      title: locale === 'bn' ? 'সিস্টেম ওনার - অ্যানালিটিক্স' : 'System Owner - Analytics',
-      label: locale === 'bn' ? 'অ্যানালিটিক্স' : 'Analytics',
-      icon: Shield,
-    },
-    {
-      url: '/heroImage/g2.png',
-      title: locale === 'bn' ? 'সিস্টেম ওনার - কোম্পানি রেজিস্ট্রি' : 'System Owner - Businesses Registry',
-      label: locale === 'bn' ? 'কোম্পানি' : 'Businesses',
-      icon: Layout,
-    },
-    {
-      url: '/heroImage/g3.png',
-      title: locale === 'bn' ? 'সিস্টেম ওনার - বিলিং ও প্ল্যান' : 'System Owner - Billing & Plans',
-      label: locale === 'bn' ? 'বিলিং' : 'Billing',
-      icon: BarChart3,
-    },
-    {
       url: '/heroImage/g4.png',
       title: locale === 'bn' ? 'খামার ওভারভিউ' : 'Farms Overview',
       label: locale === 'bn' ? 'খামার' : 'Farms',
       icon: Layout,
     },
     {
+      url: '/previews/preview_7.png',
+      title: locale === 'bn' ? 'পশুপাখি রেজিস্ট্রি' : 'Animals Registry',
+      label: locale === 'bn' ? 'পশুপাখি' : 'Animals',
+      icon: Shield,
+    },
+    {
       url: '/heroImage/g5.png',
       title: locale === 'bn' ? 'কর্মী তালিকা ডিরেক্টরি' : 'Staff Directory',
       label: locale === 'bn' ? 'কর্মী' : 'Staff',
       icon: Users,
+    },
+    {
+      url: '/previews/preview_8.png',
+      title: locale === 'bn' ? 'কর্মী বরাদ্দকৃত কাজ' : 'Assigned Tasks',
+      label: locale === 'bn' ? 'কাজ' : 'Tasks',
+      icon: Monitor,
     },
   ];
 
@@ -140,7 +134,7 @@ export default function Hero() {
               </div>
               
               {/* Switcher Controls tabs */}
-              <div className="grid grid-cols-5 gap-2 mt-4">
+              <div className="grid grid-cols-4 gap-2 mt-4">
                 {heroImages.map((img, idx) => {
                   const Icon = img.icon;
                   const isActive = idx === activeImageIdx;

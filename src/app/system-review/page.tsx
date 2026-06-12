@@ -12,27 +12,6 @@ export default function SystemReviewPage() {
 
   const reviews = [
     {
-      title: t('review.p1_title'),
-      desc: t('review.p1_desc'),
-      image: '/previews/preview_1.png',
-      badge: locale === 'bn' ? 'সুপার অ্যাডমিন' : 'Super Admin',
-      icon: Shield,
-    },
-    {
-      title: t('review.p2_title'),
-      desc: t('review.p2_desc'),
-      image: '/previews/preview_2.png',
-      badge: locale === 'bn' ? 'সুপার অ্যাডমিন' : 'Super Admin',
-      icon: Shield,
-    },
-    {
-      title: t('review.p3_title'),
-      desc: t('review.p3_desc'),
-      image: '/previews/preview_3.png',
-      badge: locale === 'bn' ? 'সুপার অ্যাডমিন' : 'Super Admin',
-      icon: Shield,
-    },
-    {
       title: t('review.p4_title'),
       desc: t('review.p4_desc'),
       image: '/previews/preview_4.png',
