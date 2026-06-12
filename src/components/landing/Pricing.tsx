@@ -82,7 +82,7 @@ export default function Pricing() {
                 <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
                 <p className="text-xs text-muted-foreground mb-4">{plan.desc}</p>
                 <div className="flex items-baseline mb-6">
-                  <span className="text-4xl font-extrabold">{formatCurrency(plan.price)}</span>
+                  <span className="text-4xl font-extrabold">{formatCurrency(plan.price, locale)}</span>
                   <span className="text-muted-foreground text-sm ml-1">/{locale === 'bn' ? 'মাস' : 'month'}</span>
                 </div>
                 <ul className="space-y-3 text-sm text-muted-foreground mb-8">

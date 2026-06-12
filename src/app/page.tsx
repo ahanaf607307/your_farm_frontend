@@ -5,6 +5,7 @@ import { MessageSquare } from 'lucide-react';
 import Header from '@/components/landing/Header';
 import Hero from '@/components/landing/Hero';
 import Features from '@/components/landing/Features';
+import VideoShowcase from '@/components/landing/VideoShowcase';
 import Roles from '@/components/landing/Roles';
 import Pricing from '@/components/landing/Pricing';
 import ContactForm from '@/components/landing/ContactForm';
@@ -22,6 +23,9 @@ export default function LandingPage() {
 
         {/* Dynamic Farm profiles showcase */}
         <Features />
+
+        {/* Interactive walkthrough video showreel */}
+        <VideoShowcase />
 
         {/* Granular RBAC section showing tenant roles (excludes System Owner) */}
         <Roles />

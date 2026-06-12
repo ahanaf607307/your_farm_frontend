@@ -39,6 +39,17 @@ export default function Hero() {
 
   return (
     <section className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 border-b">
+      {/* Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover opacity-12 dark:opacity-8 pointer-events-none -z-20"
+      >
+        <source src="/heroVide/framVideo.mp4" type="video/mp4" />
+      </video>
+
       {/* Background Gradient Blurs */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-500/10 dark:bg-orange-500/5 rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-3xl pointer-events-none -z-10" />
