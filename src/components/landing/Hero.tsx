@@ -12,25 +12,25 @@ export default function Hero() {
 
   const heroImages = [
     {
-      url: '/heroImage/g4.png',
+      url: '/heroImage/g1.png',
       title: locale === 'bn' ? 'খামার ওভারভিউ' : 'Farms Overview',
       label: locale === 'bn' ? 'খামার' : 'Farms',
       icon: Layout,
     },
     {
-      url: '/previews/preview_7.png',
+      url: '/heroImage/g2.png',
       title: locale === 'bn' ? 'পশুপাখি রেজিস্ট্রি' : 'Animals Registry',
       label: locale === 'bn' ? 'পশুপাখি' : 'Animals',
       icon: Shield,
     },
     {
-      url: '/heroImage/g5.png',
+      url: '/heroImage/g3.png',
       title: locale === 'bn' ? 'কর্মী তালিকা ডিরেক্টরি' : 'Staff Directory',
       label: locale === 'bn' ? 'কর্মী' : 'Staff',
       icon: Users,
     },
     {
-      url: '/previews/preview_8.png',
+      url: '/heroImage/g4.png',
       title: locale === 'bn' ? 'কর্মী বরাদ্দকৃত কাজ' : 'Assigned Tasks',
       label: locale === 'bn' ? 'কাজ' : 'Tasks',
       icon: Monitor,

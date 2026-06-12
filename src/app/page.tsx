@@ -21,11 +21,11 @@ export default function LandingPage() {
         {/* Localized Hero banner section */}
         <Hero />
 
-        {/* Dynamic Farm profiles showcase */}
-        <Features />
-
         {/* Interactive walkthrough video showreel */}
         <VideoShowcase />
+
+        {/* Dynamic Farm profiles showcase */}
+        <Features />
 
         {/* Granular RBAC section showing tenant roles (excludes System Owner) */}
         <Roles />
