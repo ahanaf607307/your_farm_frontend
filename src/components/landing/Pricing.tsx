@@ -5,14 +5,15 @@ import Link from 'next/link';
 import { Check, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/providers/LanguageProvider';
+import { formatCurrency } from '@/lib/utils';
 
 export default function Pricing() {
-  const { t } = useLanguage();
+  const { t, locale } = useLanguage();
 
   const plans = [
     {
       name: 'Basic',
-      price: '$49',
+      price: 49,
       desc: t('pricing.basicDesc'),
       features: [
         t('pricing.farms2'),
@@ -23,7 +24,7 @@ export default function Pricing() {
     },
     {
       name: 'Standard',
-      price: '$99',
+      price: 99,
       desc: t('pricing.standardDesc'),
       popular: true,
       features: [
@@ -37,7 +38,7 @@ export default function Pricing() {
     },
     {
       name: 'Enterprise',
-      price: '$199',
+      price: 199,
       desc: t('pricing.enterpriseDesc'),
       features: [
         t('pricing.farmsUnlimited'),
@@ -81,8 +82,8 @@ export default function Pricing() {
                 <h3 className="text-xl font-bold mb-1">{plan.name}</h3>
                 <p className="text-xs text-muted-foreground mb-4">{plan.desc}</p>
                 <div className="flex items-baseline mb-6">
-                  <span className="text-4xl font-extrabold">{plan.price}</span>
-                  <span className="text-muted-foreground text-sm ml-1">/month</span>
+                  <span className="text-4xl font-extrabold">{formatCurrency(plan.price)}</span>
+                  <span className="text-muted-foreground text-sm ml-1">/{locale === 'bn' ? 'মাস' : 'month'}</span>
                 </div>
                 <ul className="space-y-3 text-sm text-muted-foreground mb-8">
                   {plan.features.map((feat, fIdx) => (

@@ -103,12 +103,24 @@ const translations: Record<Locale, Record<string, string>> = {
     'review.back': 'Back to Home',
     'review.title': 'SaaS System Dashboard Reviews',
     'review.subtitle': 'Detailed preview walkthroughs showing platform controls, live metrics tracking, and administration panel settings.',
-    'review.ownerPanel': 'System Owner Operations Panel',
-    'review.ownerPanelDesc': 'Super-admin dashboard summarizing active tenant subscription packages, gross monthly income, registration streams, and live server settings configuration parameters.',
-    'review.bizPanel': 'Business Owner Controls Dashboard',
-    'review.bizPanelDesc': 'Corporate management screen where business owners register new farm divisions, onboard operations managers, monitor global profits, and track cash invoices.',
-    'review.managerPanel': 'Operational Farm Manager Dashboard',
-    'review.managerPanelDesc': 'Daily operations portal showing animal registrations, veterinary dosage charts, feed logs, stock inventory trackers, and staff assignments checklists.',
+    
+    // 8 Previews
+    'review.p1_title': 'System Owner - System Analytics',
+    'review.p1_desc': 'Super-admin dashboard showing active tenant accounts, monthly gross revenue metrics, registration streams, and platform conversion indicators.',
+    'review.p2_title': 'System Owner - Businesses Registry',
+    'review.p2_desc': 'Admin table listing all tenant business databases where the super-admin can edit client details, register new businesses, or activate/suspend databases.',
+    'review.p3_title': 'System Owner - Subscriptions Configuration',
+    'review.p3_desc': 'Subscriptions overview showing active tier parameters (Basic, Standard, Enterprise) along with cash invoice billing logs.',
+    'review.p4_title': 'Business Owner - Farms Control',
+    'review.p4_desc': 'Tenant business admin dashboard to create new farm divisions, onboard managers, and review financial overview metrics.',
+    'review.p5_title': 'Business Owner - Staff Registry',
+    'review.p5_desc': 'Management directory where business owners register employees and assign managers to specific farm locations.',
+    'review.p6_title': 'Farm Manager - Farm Overview',
+    'review.p6_desc': 'Operations workspace displaying feed levels, active livestock quantities, pending checklists completions progress, and cashflow stats.',
+    'review.p7_title': 'Farm Manager - Animals Registry',
+    'review.p7_desc': 'Livestock database cataloging animal codes, active categories, breeding statuses, feed types, and veterinary logging logs.',
+    'review.p8_title': 'Farm Employee - Assigned Tasks',
+    'review.p8_desc': 'Mobile-responsive action list where employees track feed distribution, vaccines, and report task completions directly from the field.',
   },
   bn: {
     // Navigation
@@ -150,7 +162,7 @@ const translations: Record<Locale, Record<string, string>> = {
 
     // Roles Section
     'roles.title': 'সুনির্দিষ্ট ভূমিকা-ভিত্তিক অ্যাক্সেস নিয়ন্ত্রণ',
-    'roles.subtitle': 'আপনার কাজের ধারা অনুযায়ী স্বয়ংক্রিয়ভাবে কাজ এবং ভিউ সীমিত করুন। তিনটি আলাদা ড্যাশবোর্ড সরাসরি ব্যবহারের জন্য প্রস্তুত।',
+    'roles.subtitle': 'আপনার কাজের ধারা অনুযায়ী স্বয়ংক্রিয়ভাবে কাজ এবং ভিউ সীমিত করুন। তিনটি ড্যাশবোর্ড সরাসরি ব্যবহারের জন্য প্রস্তুত।',
     'roles.bizOwner': 'ব্যবসার মালিক',
     'roles.bizOwnerDesc': 'কোম্পানি ব্যবস্থাপনা। খামার তৈরি, ম্যানেজার ও কর্মী নিয়োগ, আর্থিক বিবরণী ট্র্যাকিং এবং কোম্পানির ব্যয় ও লাভ পর্যালোচনা।',
     'roles.manager': 'খামার ব্যবস্থাপক',
@@ -202,25 +214,39 @@ const translations: Record<Locale, Record<string, string>> = {
     'review.back': 'হোম পেজে ফিরে যান',
     'review.title': 'খামার ড্যাশবোর্ড পর্যালোচনা',
     'review.subtitle': 'প্ল্যাটফর্ম নিয়ন্ত্রণ, রিয়েল-টাইম ডেটা ট্র্যাকিং এবং প্রশাসনিক প্যানেল সেটিংসমুহের বিস্তারিত প্রিভিউ।',
-    'review.ownerPanel': 'সিস্টেম ওনার প্যানেল',
-    'review.ownerPanelDesc': 'সুপার-অ্যাডমিন ড্যাশবোর্ড যা সক্রিয় গ্রাহক সাবস্ক্রিপশন, মাসিক আয়, নতুন রেজিস্ট্রেশন এবং সার্ভার কনফিগারেশন প্যারামিটারগুলোর বিবরণ দেয়।',
-    'review.bizPanel': 'ব্যবসার মালিক ড্যাশবোর্ড',
-    'review.bizPanelDesc': 'কর্পোরেট ম্যানেজমেন্ট স্ক্রিন যেখানে ব্যবসার মালিকরা নতুন খামার রেজিস্টার করতে পারেন, ম্যানেজার অনবোর্ড করতে পারেন এবং আয়-ব্যয় হিসাব করতে পারেন।',
-    'review.managerPanel': 'খামার ব্যবস্থাপক ড্যাশবোর্ড',
-    'review.managerPanelDesc': 'দৈনিক খামার পরিচালনা পোর্টাল যেখানে গবাদি পশু রেজিস্ট্রি, টিকাদান তথ্য, ফিড স্টক ট্র্যাকার এবং কর্মীদের কাজ দেখা যায়।',
+    
+    // 8 Previews
+    'review.p1_title': 'সিস্টেম ওনার - সিস্টেম অ্যানালিটিক্স',
+    'review.p1_desc': 'সুপার-অ্যাডমিন ড্যাশবোর্ড যা সক্রিয় গ্রাহক অ্যাকাউন্ট, মাসিক মোট রাজস্বের হিসাব, নতুন রেজিস্ট্রেশন এবং কনভার্সন রেট দেখায়।',
+    'review.p2_title': 'সিস্টেম ওনার - ব্যবসা রেজিস্ট্রি',
+    'review.p2_desc': 'অ্যাডমিন টেবিল যা সব গ্রাহক কোম্পানির তালিকা দেখায়, যেখান থেকে অ্যাডমিন তাদের তথ্য এডিট, নতুন ব্যবসা রেজিস্টার বা সক্রিয়/নিষ্ক্রিয় করতে পারেন।',
+    'review.p3_title': 'সিস্টেম ওনার - সাবস্ক্রিপশন কনফিগারেশন',
+    'review.p3_desc': 'সক্রিয় প্ল্যানসমূহের প্যারামিটার এবং সাম্প্রতিক ক্যাশ ইনভয়েস বিলিং লগের বিবরণী প্যানেল।',
+    'review.p4_title': 'ব্যবসার মালিক - খামার নিয়ন্ত্রণ',
+    'review.p4_desc': 'গ্রাহক ড্যাশবোর্ড যেখান থেকে ব্যবসার মালিকরা নতুন খামার তৈরি, ম্যানেজার অনবোর্ড এবং লাভ-ক্ষতির হিসাব দেখতে পারেন।',
+    'review.p5_title': 'ব্যবসার মালিক - কর্মী রেজিস্ট্রি',
+    'review.p5_desc': 'কর্মী ডিরেক্টরি যেখান থেকে ব্যবসার মালিকরা নতুন কর্মী নিয়োগ এবং নির্দিষ্ট খামারে ম্যানেজার বা এমপ্লয়ি নিযুক্ত করতে পারেন।',
+    'review.p6_title': 'খামার ব্যবস্থাপক - খামার ওভারভিউ',
+    'review.p6_desc': 'খামার পরিচালনা ড্যাশবোর্ড যা খাদ্যের মজুদ, গবাদি পশুর সংখ্যা, কাজের অগ্রগতি এবং খামারের আয়-ব্যয়ের হিসাব দেখায়।',
+    'review.p7_title': 'খামার ব্যবস্থাপক - পশুপাখি রেজিস্ট্রি',
+    'review.p7_desc': 'গবাদি পশুর ডাটাবেস যা পশুর কোড, ক্যাটাগরি, প্রজনন অবস্থা, ফিড টাইপ এবং ভেটেরিনারি লগ দেখায়।',
+    'review.p8_title': 'খামার কর্মী - বরাদ্দকৃত কাজ',
+    'review.p8_desc': 'মোবাইল-বান্ধব কাজের তালিকা যেখান থেকে কর্মীরা খাবার বিতরণ, ভ্যাকসিন দেওয়া এবং কাজ সম্পন্ন করার আপডেট সরাসরি প্রদান করতে পারেন।',
   }
 };
 
 const LanguageContext = createContext<LanguageContextProps | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState<Locale>('en');
+  const [locale, setLocale] = useState<Locale>('bn');
 
   // Load language preference from local storage if available
   useEffect(() => {
     const saved = localStorage.getItem('farmly_locale') as Locale;
     if (saved === 'en' || saved === 'bn') {
       setLocale(saved);
+    } else {
+      setLocale('bn');
     }
   }, []);
 

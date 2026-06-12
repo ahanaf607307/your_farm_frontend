@@ -98,6 +98,7 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
+    font-family: var(--font-hind-siliguri), var(--font-geist-sans), sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   button,
