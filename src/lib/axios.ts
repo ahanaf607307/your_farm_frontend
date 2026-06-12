@@ -12,7 +12,7 @@ export const axiosInstance = axios.create({
   },
 });
 
-// Request interceptor
+// Request interceptor for injection
 axiosInstance.interceptors.request.use(
   (config) => {
     if (typeof window !== 'undefined') {
@@ -26,7 +26,7 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Response interceptor
+// Response interceptor for status handling
 axiosInstance.interceptors.response.use(
   (response) => response,
   async (error) => {
@@ -38,15 +38,9 @@ axiosInstance.interceptors.response.use(
       try {
         const rToken = typeof window !== 'undefined' ? localStorage.getItem('farm_refresh_token') : null;
         if (rToken) {
-          // In real application, request new token
-          // const res = await axios.post(`${API_BASE_URL}/auth/refresh`, { refreshToken: rToken });
-          // const newToken = res.data.token;
-          // localStorage.setItem('farm_token', newToken);
-          // originalRequest.headers.Authorization = `Bearer ${newToken}`;
-          // return axiosInstance(originalRequest);
+          // Token refresh flow here
         }
       } catch (refreshError) {
-        // Refresh token expired - force logout
         if (typeof window !== 'undefined') {
           localStorage.removeItem('farm_token');
           localStorage.removeItem('farm_refresh_token');
@@ -59,15 +53,14 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-// --- MOCK INTERCEPTOR LAYER ---
-// Intercepts AXIOS requests and returns local mock database updates when running in mock mode.
-const USE_MOCK = true; // Easily toggle for actual API
+// --- CUSTOM ADAPTER ENGINE (MOCK API) ---
+const USE_MOCK = true;
 
 if (USE_MOCK) {
-  // A helper to simulate network latency
   const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+  const defaultAdapter = axiosInstance.defaults.adapter || axios.defaults.adapter;
 
-  axiosInstance.interceptors.request.use(async (config) => {
+  axiosInstance.defaults.adapter = async (config) => {
     const url = config.url || '';
     const method = (config.method || 'get').toLowerCase();
     
@@ -80,8 +73,7 @@ if (USE_MOCK) {
       path = '/' + path;
     }
 
-    // Custom Mock Router
-    await delay(300); // 300ms simulated latency
+    await delay(300); // Simulated latency
 
     try {
       // 1. Authentication
@@ -93,17 +85,15 @@ if (USE_MOCK) {
         if (user) {
           const mockToken = 'mock-jwt-token-xyz';
           const mockRefreshToken = 'mock-jwt-refresh-xyz';
-          return Promise.reject({
+          return {
+            status: 200,
+            data: { user, token: mockToken, refreshToken: mockRefreshToken },
+            statusText: 'OK',
+            headers: {},
             config,
-            response: {
-              status: 200,
-              data: { user, token: mockToken, refreshToken: mockRefreshToken },
-              statusText: 'OK',
-              headers: {},
-            },
-          });
+          };
         } else {
-          return Promise.reject({
+          throw {
             config,
             response: {
               status: 401,
@@ -111,7 +101,7 @@ if (USE_MOCK) {
               statusText: 'Unauthorized',
               headers: {},
             },
-          });
+          };
         }
       }
 
@@ -120,7 +110,7 @@ if (USE_MOCK) {
         const users = mockDb.getMockUsers();
         
         if (users.find(u => u.email.toLowerCase() === data.email.toLowerCase())) {
-          return Promise.reject({
+          throw {
             config,
             response: {
               status: 400,
@@ -128,7 +118,7 @@ if (USE_MOCK) {
               statusText: 'Bad Request',
               headers: {},
             },
-          });
+          };
         }
 
         const newUser = {
@@ -159,23 +149,24 @@ if (USE_MOCK) {
         mockDb.saveUsers([...users, newUser]);
         mockDb.saveBusinesses([...mockDb.getMockBusinesses(), newBiz]);
 
-        return Promise.reject({
+        return {
+          status: 200,
+          data: { user: newUser, token: 'mock-jwt-token-xyz', refreshToken: 'mock-jwt-refresh-xyz' },
+          statusText: 'OK',
+          headers: {},
           config,
-          response: {
-            status: 200,
-            data: { user: newUser, token: 'mock-jwt-token-xyz', refreshToken: 'mock-jwt-refresh-xyz' },
-            statusText: 'OK',
-            headers: {},
-          },
-        });
+        };
       }
 
       // 2. Businesses
       if (path === '/businesses' && method === 'get') {
-        return Promise.reject({
+        return {
+          status: 200,
+          data: mockDb.getMockBusinesses(),
+          statusText: 'OK',
+          headers: {},
           config,
-          response: { status: 200, data: mockDb.getMockBusinesses() },
-        });
+        };
       }
 
       if (path === '/businesses' && method === 'post') {
@@ -195,7 +186,13 @@ if (USE_MOCK) {
           createdAt: new Date().toISOString(),
         };
         mockDb.saveBusinesses([...list, newBiz]);
-        return Promise.reject({ config, response: { status: 201, data: newBiz } });
+        return {
+          status: 201,
+          data: newBiz,
+          statusText: 'Created',
+          headers: {},
+          config,
+        };
       }
 
       if (path.startsWith('/businesses/') && (method === 'put' || method === 'patch')) {
@@ -206,7 +203,13 @@ if (USE_MOCK) {
         if (idx !== -1) {
           list[idx] = { ...list[idx], ...body };
           mockDb.saveBusinesses(list);
-          return Promise.reject({ config, response: { status: 200, data: list[idx] } });
+          return {
+            status: 200,
+            data: list[idx],
+            statusText: 'OK',
+            headers: {},
+            config,
+          };
         }
       }
 
@@ -215,15 +218,24 @@ if (USE_MOCK) {
         const list = mockDb.getMockBusinesses();
         const filtered = list.filter(b => b.id !== id);
         mockDb.saveBusinesses(filtered);
-        return Promise.reject({ config, response: { status: 200, data: { success: true } } });
+        return {
+          status: 200,
+          data: { success: true },
+          statusText: 'OK',
+          headers: {},
+          config,
+        };
       }
 
       // 3. Farms
       if (path === '/farms' && method === 'get') {
-        return Promise.reject({
+        return {
+          status: 200,
+          data: mockDb.getMockFarms(),
+          statusText: 'OK',
+          headers: {},
           config,
-          response: { status: 200, data: mockDb.getMockFarms() },
-        });
+        };
       }
 
       if (path === '/farms' && method === 'post') {
@@ -246,15 +258,24 @@ if (USE_MOCK) {
           mockDb.saveBusinesses(bizList);
         }
 
-        return Promise.reject({ config, response: { status: 201, data: newFarm } });
+        return {
+          status: 201,
+          data: newFarm,
+          statusText: 'Created',
+          headers: {},
+          config,
+        };
       }
 
       // 4. Animal Categories
       if (path === '/categories' && method === 'get') {
-        return Promise.reject({
+        return {
+          status: 200,
+          data: mockDb.getMockCategories(),
+          statusText: 'OK',
+          headers: {},
           config,
-          response: { status: 200, data: mockDb.getMockCategories() },
-        });
+        };
       }
 
       if (path === '/categories' && method === 'post') {
@@ -266,22 +287,37 @@ if (USE_MOCK) {
           animalCount: 0,
         };
         mockDb.saveCategories([...list, newCat]);
-        return Promise.reject({ config, response: { status: 201, data: newCat } });
+        return {
+          status: 201,
+          data: newCat,
+          statusText: 'Created',
+          headers: {},
+          config,
+        };
       }
 
       if (path.startsWith('/categories/') && method === 'delete') {
         const id = path.split('/')[2];
         const list = mockDb.getMockCategories();
         mockDb.saveCategories(list.filter(c => c.id !== id));
-        return Promise.reject({ config, response: { status: 200, data: { success: true } } });
+        return {
+          status: 200,
+          data: { success: true },
+          statusText: 'OK',
+          headers: {},
+          config,
+        };
       }
 
       // 5. Animals
       if (path === '/animals' && method === 'get') {
-        return Promise.reject({
+        return {
+          status: 200,
+          data: mockDb.getMockAnimals(),
+          statusText: 'OK',
+          headers: {},
           config,
-          response: { status: 200, data: mockDb.getMockAnimals() },
-        });
+        };
       }
 
       if (path === '/animals' && method === 'post') {
@@ -303,7 +339,13 @@ if (USE_MOCK) {
           cat.animalCount += newAni.quantity;
           mockDb.saveCategories(cats);
         }
-        return Promise.reject({ config, response: { status: 201, data: newAni } });
+        return {
+          status: 201,
+          data: newAni,
+          statusText: 'Created',
+          headers: {},
+          config,
+        };
       }
 
       if (path.startsWith('/animals/') && method === 'put') {
@@ -314,7 +356,13 @@ if (USE_MOCK) {
         if (idx !== -1) {
           list[idx] = { ...list[idx], ...body, quantity: Number(body.quantity || list[idx].quantity), weight: Number(body.weight || list[idx].weight) };
           mockDb.saveAnimals(list);
-          return Promise.reject({ config, response: { status: 200, data: list[idx] } });
+          return {
+            status: 200,
+            data: list[idx],
+            statusText: 'OK',
+            headers: {},
+            config,
+          };
         }
       }
 
@@ -322,15 +370,24 @@ if (USE_MOCK) {
         const id = path.split('/')[2];
         const list = mockDb.getMockAnimals();
         mockDb.saveAnimals(list.filter(a => a.id !== id));
-        return Promise.reject({ config, response: { status: 200, data: { success: true } } });
+        return {
+          status: 200,
+          data: { success: true },
+          statusText: 'OK',
+          headers: {},
+          config,
+        };
       }
 
       // 6. Medicine
       if (path === '/medicines' && method === 'get') {
-        return Promise.reject({
+        return {
+          status: 200,
+          data: mockDb.getMockMedicines(),
+          statusText: 'OK',
+          headers: {},
           config,
-          response: { status: 200, data: mockDb.getMockMedicines() },
-        });
+        };
       }
 
       if (path === '/medicines' && method === 'post') {
@@ -344,15 +401,24 @@ if (USE_MOCK) {
           status: Number(body.stock || 10) < 5 ? 'low_stock' : 'available',
         };
         mockDb.saveMedicines([...list, newMed]);
-        return Promise.reject({ config, response: { status: 201, data: newMed } });
+        return {
+          status: 201,
+          data: newMed,
+          statusText: 'Created',
+          headers: {},
+          config,
+        };
       }
 
       // 7. Food Items
       if (path === '/foods' && method === 'get') {
-        return Promise.reject({
+        return {
+          status: 200,
+          data: mockDb.getMockFoodItems(),
+          statusText: 'OK',
+          headers: {},
           config,
-          response: { status: 200, data: mockDb.getMockFoodItems() },
-        });
+        };
       }
 
       if (path === '/foods' && method === 'post') {
@@ -366,15 +432,24 @@ if (USE_MOCK) {
           status: Number(body.stock || 50) < 50 ? 'low_stock' : 'available',
         };
         mockDb.saveFoodItems([...list, newFood]);
-        return Promise.reject({ config, response: { status: 201, data: newFood } });
+        return {
+          status: 201,
+          data: newFood,
+          statusText: 'Created',
+          headers: {},
+          config,
+        };
       }
 
       // 8. Tasks
       if (path === '/tasks' && method === 'get') {
-        return Promise.reject({
+        return {
+          status: 200,
+          data: mockDb.getMockTasks(),
+          statusText: 'OK',
+          headers: {},
           config,
-          response: { status: 200, data: mockDb.getMockTasks() },
-        });
+        };
       }
 
       if (path === '/tasks' && method === 'post') {
@@ -396,7 +471,7 @@ if (USE_MOCK) {
         
         mockDb.saveTasks([...list, newTask]);
 
-        // Add Notification for task assigned
+        // Add Notification
         const notifList = mockDb.getMockNotifications();
         const newNotif = {
           id: `notif-${Date.now()}`,
@@ -409,7 +484,13 @@ if (USE_MOCK) {
         };
         mockDb.saveNotifications([newNotif, ...notifList]);
 
-        return Promise.reject({ config, response: { status: 201, data: newTask } });
+        return {
+          status: 201,
+          data: newTask,
+          statusText: 'Created',
+          headers: {},
+          config,
+        };
       }
 
       if (path.startsWith('/tasks/') && method === 'put') {
@@ -421,7 +502,6 @@ if (USE_MOCK) {
           list[idx] = { ...list[idx], ...body, updatedAt: new Date().toISOString() };
           mockDb.saveTasks(list);
 
-          // Add notification if task is marked complete
           if (body.status === 'completed') {
             const notifList = mockDb.getMockNotifications();
             const newNotif = {
@@ -436,7 +516,13 @@ if (USE_MOCK) {
             mockDb.saveNotifications([newNotif, ...notifList]);
           }
 
-          return Promise.reject({ config, response: { status: 200, data: list[idx] } });
+          return {
+            status: 200,
+            data: list[idx],
+            statusText: 'OK',
+            headers: {},
+            config,
+          };
         }
       }
 
@@ -445,11 +531,17 @@ if (USE_MOCK) {
         const userId = path.split('/')[3];
         const userRole = path.split('/')[4] as Role;
         const sessions = mockDb.getChatSessionsForUser(userId, userRole);
-        return Promise.reject({ config, response: { status: 200, data: sessions } });
+        return {
+          status: 200,
+          data: sessions,
+          statusText: 'OK',
+          headers: {},
+          config,
+        };
       }
 
       if (path.startsWith('/chat/messages/') && method === 'get') {
-        const ids = path.split('/')[3].split('-'); // format "user1-user2"
+        const ids = path.split('/')[3].split('-'); 
         const u1 = ids[0];
         const u2 = ids[1];
         const messages = mockDb.getMockMessages();
@@ -457,7 +549,6 @@ if (USE_MOCK) {
           m => (m.senderId === u1 && m.receiverId === u2) || (m.senderId === u2 && m.receiverId === u1)
         ).sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
         
-        // Mark as read
         const updated = messages.map(m => {
           if (m.senderId === u2 && m.receiverId === u1 && m.unread) {
             return { ...m, unread: false };
@@ -466,7 +557,13 @@ if (USE_MOCK) {
         });
         mockDb.saveMessages(updated);
 
-        return Promise.reject({ config, response: { status: 200, data: thread } });
+        return {
+          status: 200,
+          data: thread,
+          statusText: 'OK',
+          headers: {},
+          config,
+        };
       }
 
       if (path === '/chat/messages' && method === 'post') {
@@ -479,15 +576,24 @@ if (USE_MOCK) {
           unread: true,
         };
         mockDb.saveMessages([...list, newMessage]);
-        return Promise.reject({ config, response: { status: 201, data: newMessage } });
+        return {
+          status: 201,
+          data: newMessage,
+          statusText: 'Created',
+          headers: {},
+          config,
+        };
       }
 
       // 10. Notifications
       if (path === '/notifications' && method === 'get') {
-        return Promise.reject({
+        return {
+          status: 200,
+          data: mockDb.getMockNotifications(),
+          statusText: 'OK',
+          headers: {},
           config,
-          response: { status: 200, data: mockDb.getMockNotifications() },
-        });
+        };
       }
 
       if (path.startsWith('/notifications/') && method === 'put') {
@@ -497,39 +603,33 @@ if (USE_MOCK) {
         if (idx !== -1) {
           list[idx].read = true;
           mockDb.saveNotifications(list);
-          return Promise.reject({ config, response: { status: 200, data: list[idx] } });
+          return {
+            status: 200,
+            data: list[idx],
+            statusText: 'OK',
+            headers: {},
+            config,
+          };
         }
       }
 
-      // Fallback for unhandled mock calls
-      return Promise.reject({
-        config,
-        response: {
-          status: 404,
-          data: { message: `Mock endpoint not found: ${method.toUpperCase()} ${path}` },
-        },
-      });
+      // Fallback to real API if path does not match mock paths
+      if (defaultAdapter) {
+        return (defaultAdapter as any)(config);
+      }
+      throw new Error('No default adapter available.');
 
     } catch (e: any) {
-      return Promise.reject({
+      if (e.response) throw e; 
+      throw {
         config,
         response: {
           status: 500,
           data: { message: 'Internal mock server error: ' + e.message },
+          statusText: 'Internal Server Error',
+          headers: {},
         },
-      });
+      };
     }
-  });
-
-  // Intercept the final promise error and convert simulated response errors to RESOLVED status 200/201/etc.
-  axiosInstance.interceptors.response.use(
-    (response) => response,
-    (error) => {
-      // If the error object has a simulated "response", resolve it as a successful response
-      if (error && error.response && error.response.status >= 200 && error.response.status < 300) {
-        return Promise.resolve(error.response);
-      }
-      return Promise.reject(error);
-    }
-  );
+  };
 }

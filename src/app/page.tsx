@@ -360,7 +360,7 @@ export default function LandingPage() {
             </div>
             
             <p className="text-xs text-muted-foreground">
-              &copy; {new Date().getFullYear()} Farmly Inc. All rights reserved. Platform optimized for modern multi-tenant agriculture.
+              &copy; {new Date().getFullYear()} Farmly Inc. All rights reserved. Platform optimized for modern multi-tenant agriculture. By Ahanaf Mubasshir
             </p>
 
             <div className="flex space-x-4 text-xs text-muted-foreground">
