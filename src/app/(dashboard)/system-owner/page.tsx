@@ -28,7 +28,8 @@ import {
   Pause,
   Edit,
   ArrowRight,
-  TrendingDown
+  TrendingDown,
+  Check
 } from 'lucide-react';
 
 export default function SystemOwnerPage() {
@@ -471,24 +472,43 @@ export default function SystemOwnerPage() {
           {/* Pricing tiers */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { name: 'Basic Tier', price: '$49/mo', desc: 'Best for single poultry/goat operations.', limits: 'Up to 2 Farms • 5 Employees • 100 Animals' },
-              { name: 'Standard Tier', price: '$99/mo', desc: 'Best for mid-sized multi-farm groups.', limits: 'Up to 5 Farms • 15 Employees • 500 Animals' },
-              { name: 'Enterprise Tier', price: '$199/mo', desc: 'Full custom agricultural solutions.', limits: 'Unlimited Farms • Unlimited Employees • Unlimited' }
-            ].map((tier, idx) => (
-              <Card key={idx} className="border bg-card flex flex-col justify-between p-6">
+              { name: 'Basic Tier', price: '$49', desc: 'Perfect for small single-farm owners', farms: 'Up to 2 Farms' },
+              { name: 'Standard Tier', price: '$99', desc: 'Popular choice for expanding setups', farms: 'Up to 5 Farms', popular: true },
+              { name: 'Enterprise Tier', price: '$199', desc: 'Custom configuration for agriculture groups', farms: 'Unlimited Farms' },
+            ].map((plan, idx) => (
+              <Card
+                key={idx}
+                className={`p-6 bg-card rounded-2xl border relative flex flex-col justify-between transition-all duration-300 ${
+                  plan.popular ? 'border-primary shadow-xl ring-2 ring-primary/20 scale-105 orange-glow' : 'border-border'
+                }`}
+              >
+                {plan.popular && (
+                  <span className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-orange-600 text-white text-[10px] px-3.5 py-1 rounded-full font-extrabold uppercase tracking-widest whitespace-nowrap shadow-md shadow-orange-500/20 ring-4 ring-background">
+                    Most Popular
+                  </span>
+                )}
                 <div>
-                  <span className="text-xs font-bold text-orange-500 uppercase tracking-wider">{tier.name}</span>
-                  <div className="text-3xl font-extrabold font-mono mt-2">{tier.price}</div>
-                  <p className="text-xs text-muted-foreground mt-2">{tier.desc}</p>
-                </div>
-                <div className="border-t pt-4 mt-6 text-3xs font-medium text-zinc-500 leading-normal">
-                  Limits: {tier.limits}
+                  <h3 className="text-sm font-bold mb-1 text-orange-500 uppercase tracking-wider">{plan.name}</h3>
+                  <p className="text-3xs text-muted-foreground mb-3 leading-relaxed">{plan.desc}</p>
+                  <div className="flex items-baseline mb-4">
+                    <span className="text-2xl font-extrabold font-mono">{plan.price}</span>
+                    <span className="text-muted-foreground text-3xs ml-1">/month</span>
+                  </div>
+                  <ul className="space-y-2 text-[11px] text-muted-foreground border-t pt-4">
+                    <li className="flex items-center text-foreground font-semibold"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> {plan.farms}</li>
+                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> Livestock Registry & Categories</li>
+                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> Feed & Medication Tracker</li>
+                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> Employee Task Checklists</li>
+                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> CSV Import & Export Tools</li>
+                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> Real-time Alert Notifications</li>
+                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> Internal Chat Messenger</li>
+                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> 24/7 Priority Support Helpdesk</li>
+                  </ul>
                 </div>
               </Card>
             ))}
           </div>
 
-          {/* Recent invoices log */}
           <Card className="border bg-card">
             <CardHeader>
               <CardTitle className="text-sm font-semibold">Recent Billing Logs</CardTitle>

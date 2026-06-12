@@ -284,18 +284,18 @@ export default function LandingPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {[
-                { name: 'Basic', price: '$49', desc: 'Perfect for small single-farm owners', farms: 'Up to 2 Farms', support: 'Standard Email support' },
-                { name: 'Standard', price: '$99', desc: 'Popular choice for expanding setups', farms: 'Up to 5 Farms', support: 'Priority 24/7 help desk', popular: true },
-                { name: 'Enterprise', price: '$199', desc: 'Custom configuration for agriculture groups', farms: 'Unlimited Farms', support: 'Dedicated Account Manager' },
+                { name: 'Basic', price: '$49', desc: 'Perfect for small single-farm owners', farms: 'Up to 2 Farms' },
+                { name: 'Standard', price: '$99', desc: 'Popular choice for expanding setups', farms: 'Up to 5 Farms', popular: true },
+                { name: 'Enterprise', price: '$199', desc: 'Custom configuration for agriculture groups', farms: 'Unlimited Farms' },
               ].map((plan, idx) => (
                 <div
                   key={idx}
-                  className={`p-8 rounded-2xl border relative flex flex-col justify-between bg-card ${
-                    plan.popular ? 'border-primary shadow-lg ring-2 ring-primary/20 scale-105' : 'border-border'
+                  className={`p-8 rounded-2xl border relative flex flex-col justify-between bg-card transition-all duration-300 ${
+                    plan.popular ? 'border-primary shadow-xl ring-2 ring-primary/20 scale-105 orange-glow' : 'border-border hover:border-orange-500/20'
                   }`}
                 >
                   {plan.popular && (
-                    <span className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-orange-500 text-white text-2xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+                    <span className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-orange-600 text-white text-[10px] px-3.5 py-1 rounded-full font-extrabold uppercase tracking-widest whitespace-nowrap shadow-md shadow-orange-500/20 ring-4 ring-background">
                       Most Popular
                     </span>
                   )}
@@ -307,17 +307,20 @@ export default function LandingPage() {
                       <span className="text-muted-foreground text-sm ml-1">/month</span>
                     </div>
                     <ul className="space-y-3 text-sm text-muted-foreground mb-8">
-                      <li className="flex items-center"><Check className="h-4 w-4 text-primary mr-2" /> {plan.farms}</li>
-                      <li className="flex items-center"><Check className="h-4 w-4 text-primary mr-2" /> Livestock Registry</li>
-                      <li className="flex items-center"><Check className="h-4 w-4 text-primary mr-2" /> Food/Medicine Trackers</li>
-                      <li className="flex items-center"><Check className="h-4 w-4 text-primary mr-2" /> Employee Task Cards</li>
-                      <li className="flex items-center"><Check className="h-4 w-4 text-primary mr-2" /> {plan.support}</li>
+                      <li className="flex items-center text-foreground font-semibold"><Check className="h-4 w-4 text-primary mr-2 shrink-0" /> {plan.farms}</li>
+                      <li className="flex items-center"><Check className="h-4 w-4 text-primary mr-2 shrink-0" /> Livestock Registry & Categories</li>
+                      <li className="flex items-center"><Check className="h-4 w-4 text-primary mr-2 shrink-0" /> Feed & Medication Tracker</li>
+                      <li className="flex items-center"><Check className="h-4 w-4 text-primary mr-2 shrink-0" /> Employee Task Checklists</li>
+                      <li className="flex items-center"><Check className="h-4 w-4 text-primary mr-2 shrink-0" /> CSV Import & Export Tools</li>
+                      <li className="flex items-center"><Check className="h-4 w-4 text-primary mr-2 shrink-0" /> Real-time Alert Notifications</li>
+                      <li className="flex items-center"><Check className="h-4 w-4 text-primary mr-2 shrink-0" /> Internal Chat Messenger</li>
+                      <li className="flex items-center"><Check className="h-4 w-4 text-primary mr-2 shrink-0" /> 24/7 Priority Support Helpdesk</li>
                     </ul>
                   </div>
                   <Link href="/register" passHref className="w-full">
                     <Button
                       className={`w-full py-5 rounded-xl text-sm font-bold ${
-                        plan.popular ? 'bg-orange-600 hover:bg-orange-700 text-white' : 'variant-outline'
+                        plan.popular ? 'bg-orange-600 hover:bg-orange-700 text-white shadow-md shadow-orange-500/10' : 'variant-outline'
                       }`}
                       variant={plan.popular ? 'default' : 'outline'}
                     >
@@ -326,8 +329,7 @@ export default function LandingPage() {
                   </Link>
                 </div>
               ))}
-            </div>
-          </div>
+            </div>          </div>
         </section>
 
         {/* Testimonials */}

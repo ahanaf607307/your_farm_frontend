@@ -188,9 +188,9 @@ export default function DataTable<T extends Record<string, any>>({
         )}
 
         <div className="flex items-center space-x-2 w-full sm:w-auto justify-end">
-          <Button variant="outline" size="sm" onClick={triggerCSVImport} className="text-xs">
+          {/* <Button variant="outline" size="sm" onClick={triggerCSVImport} className="text-xs">
             <Upload className="h-4 w-4 mr-1.5" /> Import CSV
-          </Button>
+          </Button> */}
           <Button variant="outline" size="sm" onClick={exportToCSV} className="text-xs">
             <Download className="h-4 w-4 mr-1.5" /> Export CSV
           </Button>
