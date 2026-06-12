@@ -552,14 +552,7 @@ export default function FarmManagerPage() {
         }}
         className="w-full"
       >
-        <TabsList className="grid grid-cols-6 max-w-3xl mb-4">
-          <TabsTrigger value="animals">Animals</TabsTrigger>
-          <TabsTrigger value="medicines">Medicines</TabsTrigger>
-          <TabsTrigger value="foods">Feeds</TabsTrigger>
-          <TabsTrigger value="inventory">Finances</TabsTrigger>
-          <TabsTrigger value="tasks">Tasks</TabsTrigger>
-          <TabsTrigger value="settings">Settings</TabsTrigger>
-        </TabsList>
+
 
         {/* Tab 1: Animals */}
         <TabsContent value="animals">

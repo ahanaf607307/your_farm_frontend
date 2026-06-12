@@ -329,12 +329,7 @@ export default function BusinessOwnerPage() {
         }}
         className="w-full"
       >
-        <TabsList className="grid grid-cols-4 max-w-2xl mb-4">
-          <TabsTrigger value="farms">Farms Control</TabsTrigger>
-          <TabsTrigger value="staff">Employee Registry</TabsTrigger>
-          <TabsTrigger value="finances">Financial Reports</TabsTrigger>
-          <TabsTrigger value="settings">Farm Settings</TabsTrigger>
-        </TabsList>
+
 
         <TabsContent value="farms" className="space-y-6">
           {/* Summary Cards for Farms */}
