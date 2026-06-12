@@ -36,13 +36,14 @@ export default function Sidebar() {
 
   if (!user) return null;
 
+
   // Define menu items based on role
   const getMenuItems = () => {
     switch (user.role) {
       case 'SYSTEM_OWNER':
         return [
-          { label: 'Businesses', path: '/system-owner', icon: Briefcase },
-          { label: 'System Analytics', path: '/system-owner?tab=analytics', icon: TrendingUp },
+          { label: 'System Analytics', path: '/system-owner', icon: TrendingUp },
+          { label: 'Businesses', path: '/system-owner?tab=businesses', icon: Briefcase },
           { label: 'Subscriptions', path: '/system-owner?tab=subscriptions', icon: CreditCard },
           { label: 'User Registry', path: '/system-owner?tab=users', icon: Users },
           { label: 'Global Settings', path: '/system-owner?tab=settings', icon: Settings },

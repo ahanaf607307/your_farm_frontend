@@ -36,7 +36,7 @@ export default function SystemOwnerPage() {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get('tab') as 'businesses' | 'analytics' | 'subscriptions' | 'users' | 'settings' | null;
   const [activeTab, setActiveTab] = useState<'businesses' | 'analytics' | 'subscriptions' | 'users' | 'settings'>(
-    tabParam === 'analytics' || tabParam === 'subscriptions' || tabParam === 'users' || tabParam === 'settings' ? tabParam : 'businesses'
+    tabParam === 'businesses' || tabParam === 'subscriptions' || tabParam === 'users' || tabParam === 'settings' ? tabParam : 'analytics'
   );
 
   useEffect(() => {
@@ -44,10 +44,9 @@ export default function SystemOwnerPage() {
     if (tab === 'businesses' || tab === 'analytics' || tab === 'subscriptions' || tab === 'users' || tab === 'settings') {
       setActiveTab(tab as any);
     } else {
-      setActiveTab('businesses');
+      setActiveTab('analytics');
     }
   }, [searchParams]);
-
   const [activeFilter, setActiveFilter] = useState<'today' | 'weekly' | 'monthly' | 'yearly'>('monthly');
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -306,20 +305,12 @@ export default function SystemOwnerPage() {
         onValueChange={(val) => {
           setActiveTab(val as any);
           const params = new URLSearchParams(window.location.search);
-          if (val === 'businesses') params.delete('tab');
+          if (val === 'analytics') params.delete('tab');
           else params.set('tab', val);
           window.history.pushState(null, '', `${window.location.pathname}?${params.toString()}`);
         }}
         className="w-full"
       >
-        <TabsList className="grid grid-cols-5 max-w-2xl mb-4">
-          <TabsTrigger value="businesses">Businesses</TabsTrigger>
-          <TabsTrigger value="analytics">System Analytics</TabsTrigger>
-          <TabsTrigger value="subscriptions">Subscriptions</TabsTrigger>
-          <TabsTrigger value="users">User Registry</TabsTrigger>
-          <TabsTrigger value="settings">Global Settings</TabsTrigger>
-        </TabsList>
-
         <TabsContent value="businesses" className="space-y-6">
           <Card className="border bg-card">
             <CardHeader className="pb-3">
