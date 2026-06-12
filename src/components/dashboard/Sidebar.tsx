@@ -88,11 +88,11 @@ export default function Sidebar() {
       {/* Brand Header */}
       <div className="h-16 flex items-center px-6 border-b justify-between">
         <div className="flex items-center space-x-2.5 overflow-hidden">
-          <div className="p-2 bg-emerald-500/10 rounded-lg text-primary shrink-0">
+          <div className="p-2 bg-orange-500/10 rounded-lg text-primary shrink-0">
             <Sprout className="h-5 w-5" />
           </div>
           {sidebarExpanded && (
-            <span className="font-extrabold text-lg bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent tracking-tight whitespace-nowrap">
+            <span className="font-extrabold text-lg bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent tracking-tight whitespace-nowrap">
               Farmly
             </span>
           )}
@@ -111,7 +111,7 @@ export default function Sidebar() {
               className={cn(
                 'flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all group relative',
                 isActive
-                  ? 'bg-emerald-500/10 text-primary'
+                  ? 'bg-orange-500/10 text-primary'
                   : 'text-muted-foreground hover:bg-accent hover:text-foreground'
               )}
             >

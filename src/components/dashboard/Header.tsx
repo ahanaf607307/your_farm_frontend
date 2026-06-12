@@ -91,11 +91,11 @@ export default function Header() {
       case 'medicine_time':
         return <Clock className="h-4 w-4 text-blue-500" />;
       case 'food_time':
-        return <Clock className="h-4 w-4 text-emerald-500" />;
+        return <Clock className="h-4 w-4 text-orange-500" />;
       case 'task_assigned':
         return <FileText className="h-4 w-4 text-indigo-500" />;
       case 'task_completed':
-        return <CheckCircle className="h-4 w-4 text-emerald-500" />;
+        return <CheckCircle className="h-4 w-4 text-orange-500" />;
       case 'low_stock':
         return <AlertTriangle className="h-4 w-4 text-amber-500" />;
       case 'farm_alerts':
@@ -135,7 +135,7 @@ export default function Header() {
         <div className="hidden md:block">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="border-emerald-500/20 text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 hover:bg-emerald-500/10">
+              <Button variant="outline" size="sm" className="border-orange-500/20 text-orange-600 dark:text-orange-400 bg-orange-500/5 hover:bg-orange-500/10">
                 <ShieldCheck className="h-4 w-4 mr-1.5" />
                 Role: {user.role.replace('_', ' ')}
                 <ChevronDown className="h-3 w-3 ml-1.5 opacity-60" />
@@ -180,7 +180,7 @@ export default function Header() {
         >
           <MessageSquare className="h-5 w-5" />
           {/* Static chat notification count trigger */}
-          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-emerald-500" />
+          <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-orange-500" />
         </Button>
 
         {/* Notifications Dropdown */}
@@ -232,7 +232,7 @@ export default function Header() {
                       </div>
                     </div>
                     {!notif.read && (
-                      <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 mt-2 shrink-0" />
+                      <div className="h-1.5 w-1.5 rounded-full bg-orange-500 mt-2 shrink-0" />
                     )}
                   </div>
                 ))
@@ -249,7 +249,7 @@ export default function Header() {
             <Button variant="ghost" className="relative h-8 w-8 rounded-full p-0">
               <Avatar className="h-8 w-8">
                 <AvatarImage src={user.profileImage} alt={user.name} />
-                <AvatarFallback className="bg-emerald-500/10 text-primary font-bold text-xs uppercase">
+                <AvatarFallback className="bg-orange-500/10 text-primary font-bold text-xs uppercase">
                   {user.name.split(' ').map((n) => n[0]).join('')}
                 </AvatarFallback>
               </Avatar>

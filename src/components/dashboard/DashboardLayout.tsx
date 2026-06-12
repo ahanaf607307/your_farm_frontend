@@ -23,10 +23,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <SheetContent side="left" className="p-0 w-64 bg-card border-r">
           <div className="h-16 flex items-center px-6 border-b">
             <Link href="/" className="flex items-center space-x-2.5">
-              <div className="p-2 bg-emerald-500/10 rounded-lg text-primary">
+              <div className="p-2 bg-orange-500/10 rounded-lg text-primary">
                 <Sprout className="h-5 w-5" />
               </div>
-              <span className="font-extrabold text-lg bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent">
+              <span className="font-extrabold text-lg bg-gradient-to-r from-orange-500 to-orange-400 bg-clip-text text-transparent">
                 Farmly
               </span>
             </Link>

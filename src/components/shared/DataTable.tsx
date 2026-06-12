@@ -195,7 +195,7 @@ export default function DataTable<T extends Record<string, any>>({
             <Download className="h-4 w-4 mr-1.5" /> Export CSV
           </Button>
           {onAddClick && (
-            <Button size="sm" onClick={onAddClick} className="bg-emerald-600 hover:bg-emerald-700 text-white text-xs">
+            <Button size="sm" onClick={onAddClick} className="bg-orange-600 hover:bg-orange-700 text-white text-xs">
               <Plus className="h-4 w-4 mr-1.5" /> {addLabel}
             </Button>
           )}

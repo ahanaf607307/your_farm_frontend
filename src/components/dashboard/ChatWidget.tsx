@@ -140,7 +140,7 @@ export default function ChatWidget() {
             </button>
           )}
           <div className="flex items-center space-x-2">
-            <MessageSquare className="h-5 w-5 text-emerald-400" />
+            <MessageSquare className="h-5 w-5 text-orange-400" />
             <span className="font-bold text-sm">
               {selectedChatUserId && activePartner
                 ? activePartner.userName
@@ -173,18 +173,18 @@ export default function ChatWidget() {
                 <div
                   key={session.userId}
                   onClick={() => dispatch(selectChatUser(session.userId))}
-                  className="p-3 border rounded-xl bg-card hover:border-emerald-500/30 transition-all duration-200 cursor-pointer flex items-center justify-between"
+                  className="p-3 border rounded-xl bg-card hover:border-orange-500/30 transition-all duration-200 cursor-pointer flex items-center justify-between"
                 >
                   <div className="flex items-center space-x-3 min-w-0">
                     <div className="relative">
                       <Avatar className="h-10 w-10">
                         <AvatarImage src={session.profileImage} />
-                        <AvatarFallback className="bg-emerald-500/10 text-primary font-bold text-xs">
+                        <AvatarFallback className="bg-orange-500/10 text-primary font-bold text-xs">
                           {session.userName.split(' ').map((n) => n[0]).join('')}
                         </AvatarFallback>
                       </Avatar>
                       {session.onlineStatus && (
-                        <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-emerald-500 border-2 border-card" />
+                        <span className="absolute bottom-0 right-0 h-2.5 w-2.5 rounded-full bg-orange-500 border-2 border-card" />
                       )}
                     </div>
                     <div className="min-w-0">
@@ -200,7 +200,7 @@ export default function ChatWidget() {
                     </div>
                   </div>
                   {session.unreadCount > 0 && (
-                    <span className="h-5 w-5 bg-emerald-500 text-white rounded-full flex items-center justify-center text-[10px] font-bold shrink-0">
+                    <span className="h-5 w-5 bg-orange-500 text-white rounded-full flex items-center justify-center text-[10px] font-bold shrink-0">
                       {session.unreadCount}
                     </span>
                   )}
@@ -227,7 +227,7 @@ export default function ChatWidget() {
                       className={cn(
                         'px-3 py-2.5 rounded-2xl text-xs leading-relaxed',
                         isMe
-                          ? 'bg-emerald-600 text-white rounded-tr-none'
+                          ? 'bg-orange-600 text-white rounded-tr-none'
                           : 'bg-card border text-foreground rounded-tl-none'
                       )}
                     >
@@ -261,7 +261,7 @@ export default function ChatWidget() {
             type="submit"
             size="icon"
             disabled={!inputText.trim() || sendMutation.isPending}
-            className="h-8 w-8 bg-emerald-600 hover:bg-emerald-700 text-white shrink-0"
+            className="h-8 w-8 bg-orange-600 hover:bg-orange-700 text-white shrink-0"
           >
             <Send className="h-3.5 w-3.5" />
           </Button>
