@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from 'sonner';
 import { store } from '@/redux/store';
+import { LanguageProvider } from './LanguageProvider';
 
 export default function AppProviders({ children }: { children: React.ReactNode }) {
   // Ensure each request has its own QueryClient in SSR/Next.js
@@ -31,8 +32,10 @@ export default function AppProviders({ children }: { children: React.ReactNode }
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Toaster position="top-right" richColors closeButton />
+          <LanguageProvider>
+            {children}
+            <Toaster position="top-right" richColors closeButton />
+          </LanguageProvider>
         </ThemeProvider>
       </QueryClientProvider>
     </Provider>
