@@ -42,10 +42,10 @@ export default function LandingPage() {
       <header className="sticky top-0 z-40 w-full border-b bg-background/85 backdrop-blur-md">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="p-2 bg-emerald-500/10 rounded-lg text-primary">
+            <div className="p-2 bg-orange-500/10 rounded-lg text-primary">
               <Sprout className="h-6 w-6" />
             </div>
-            <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent">
+            <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">
               Farmly
             </span>
           </div>
@@ -74,7 +74,7 @@ export default function LandingPage() {
               <Button variant="ghost" size="sm">Sign In</Button>
             </Link>
             <Link href="/register" passHref>
-              <Button size="sm" className="hidden sm:inline-flex bg-emerald-600 hover:bg-emerald-700 text-white">
+              <Button size="sm" className="hidden sm:inline-flex bg-orange-600 hover:bg-orange-700 text-white font-semibold shadow-md shadow-orange-500/10">
                 Register Business
               </Button>
             </Link>
@@ -86,17 +86,17 @@ export default function LandingPage() {
       <main className="flex-1">
         <section className="relative overflow-hidden pt-20 pb-16 md:pt-32 md:pb-24">
           {/* Background Gradient Blurs */}
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-3xl pointer-events-none -z-10" />
-          <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[300px] h-[300px] bg-blue-500/5 rounded-full blur-3xl pointer-events-none -z-10" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-orange-500/10 dark:bg-orange-500/5 rounded-full blur-3xl pointer-events-none -z-10" />
+          <div className="absolute top-1/3 left-1/4 -translate-y-1/2 w-[300px] h-[300px] bg-amber-500/5 rounded-full blur-3xl pointer-events-none -z-10" />
           
           <div className="container mx-auto px-4 text-center max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-semibold mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-orange-500/20 bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-semibold mb-6">
               <Award className="h-4 w-4" /> Best Farm Management Software of 2026
             </div>
             
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
               Enterprise Farm Management <br />
-              <span className="bg-gradient-to-r from-emerald-500 to-emerald-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">
                 Simplified & Unified
               </span>
             </h1>
@@ -107,7 +107,7 @@ export default function LandingPage() {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/register">
-                <Button size="lg" className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white text-base px-8 py-6 rounded-xl shadow-lg shadow-emerald-500/20">
+                <Button size="lg" className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white text-base px-8 py-6 rounded-xl shadow-lg shadow-orange-500/20 font-bold">
                   Get Started Free <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
@@ -119,7 +119,7 @@ export default function LandingPage() {
             </div>
 
             {/* Dashboard Mock Preview */}
-            <div className="mt-16 border rounded-2xl overflow-hidden shadow-2xl bg-card/60 backdrop-blur border-border/80">
+            <div className="mt-16 border rounded-2xl overflow-hidden shadow-2xl bg-card/60 backdrop-blur border-border/80 orange-glow">
               <div className="bg-muted/40 h-8 flex items-center px-4 border-b space-x-2">
                 <div className="w-3 h-3 rounded-full bg-red-500/60" />
                 <div className="w-3 h-3 rounded-full bg-yellow-500/60" />
@@ -129,11 +129,11 @@ export default function LandingPage() {
               <div className="p-4 md:p-8 bg-zinc-950 text-left overflow-x-auto">
                 <div className="min-w-[800px] space-y-6">
                   {/* Mock Navbar */}
-                  <div className="flex justify-between items-center border-b border-zinc-800 pb-4">
+                  <div className="flex justify-between items-center border-b border-zinc-855 pb-4">
                     <div className="flex items-center space-x-3">
-                      <div className="h-8 w-8 rounded bg-emerald-500 flex items-center justify-center text-white font-bold">F</div>
+                      <div className="h-8 w-8 rounded bg-orange-500 flex items-center justify-center text-white font-bold">F</div>
                       <span className="text-white font-bold text-sm">Vance Poultry Division</span>
-                      <span className="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 text-xs font-medium border border-emerald-500/20">Poultry Farm</span>
+                      <span className="px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 text-xs font-medium border border-orange-500/20">Poultry Farm</span>
                     </div>
                     <div className="flex space-x-2">
                       <span className="h-6 px-2.5 rounded bg-zinc-800 text-zinc-400 text-xs flex items-center">Active Block</span>
@@ -149,11 +149,11 @@ export default function LandingPage() {
                       { l: 'Net Profit', v: '$4,120', c: 'This Week Sales', g: '+12.4%' },
                     ].map((s, i) => (
                       <div key={i} className="bg-zinc-900 border border-zinc-800 p-4 rounded-lg">
-                        <span className="text-zinc-500 text-xs">{s.l}</span>
+                        <span className="text-zinc-550 text-xs">{s.l}</span>
                         <div className="text-white text-xl font-bold mt-1">{s.v}</div>
                         <div className="flex justify-between mt-2 text-2xs">
                           <span className="text-zinc-400">{s.c}</span>
-                          <span className={i === 1 ? 'text-amber-400 font-medium' : 'text-emerald-400 font-medium'}>{s.g}</span>
+                          <span className="text-orange-400 font-medium">{s.g}</span>
                         </div>
                       </div>
                     ))}
@@ -165,7 +165,7 @@ export default function LandingPage() {
                       <div className="h-28 flex items-end space-x-3 pt-4">
                         {[40, 55, 45, 60, 75, 80, 95].map((val, idx) => (
                           <div key={idx} className="flex-1 flex flex-col items-center">
-                            <div className="w-full bg-emerald-500/80 rounded-t" style={{ height: `${val}%` }} />
+                            <div className="w-full bg-orange-500/80 rounded-t" style={{ height: `${val}%` }} />
                             <span className="text-zinc-600 text-3xs mt-1">Day {idx + 1}</span>
                           </div>
                         ))}
@@ -176,7 +176,7 @@ export default function LandingPage() {
                       <div className="space-y-2 text-2xs">
                         <div className="flex items-center justify-between p-2 rounded bg-zinc-800/50 border border-zinc-800 text-white">
                           <span>Feed Broiler Batch #10</span>
-                          <span className="text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">Complete</span>
+                          <span className="text-orange-400 bg-orange-500/10 px-1.5 py-0.5 rounded">Complete</span>
                         </div>
                         <div className="flex items-center justify-between p-2 rounded bg-zinc-800/50 border border-zinc-800 text-white">
                           <span>Give Vaccine to Layer</span>
@@ -209,9 +209,9 @@ export default function LandingPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {farmTypes.map((farm, idx) => (
-                <Card key={idx} className="border bg-card hover:border-emerald-500/30 transition-all duration-300 group hover:shadow-md">
+                <Card key={idx} className="border bg-card hover:border-orange-500/35 transition-all duration-300 group hover:shadow-md orange-glow-hover">
                   <CardHeader className="p-5">
-                    <div className="h-10 w-10 rounded-lg bg-emerald-500/10 text-primary flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                    <div className="h-10 w-10 rounded-lg bg-orange-500/10 text-primary flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
                       <Sprout className="h-5 w-5" />
                     </div>
                     <CardTitle className="text-base font-bold">{farm.name}</CardTitle>
@@ -259,7 +259,7 @@ export default function LandingPage() {
                 },
               ].map((item, idx) => (
                 <div key={idx} className="p-6 border rounded-xl bg-card hover:shadow-md transition-shadow">
-                  <div className="h-12 w-12 rounded-full bg-emerald-500/10 text-primary flex items-center justify-center mb-4">
+                  <div className="h-12 w-12 rounded-full bg-orange-500/10 text-primary flex items-center justify-center mb-4">
                     <item.icon className="h-6 w-6" />
                   </div>
                   <h3 className="text-lg font-bold mb-2">{item.role}</h3>
@@ -295,7 +295,7 @@ export default function LandingPage() {
                   }`}
                 >
                   {plan.popular && (
-                    <span className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-primary text-primary-foreground text-2xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+                    <span className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-orange-500 text-white text-2xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">
                       Most Popular
                     </span>
                   )}
@@ -316,8 +316,8 @@ export default function LandingPage() {
                   </div>
                   <Link href="/register" passHref className="w-full">
                     <Button
-                      className={`w-full py-5 rounded-xl text-sm font-semibold ${
-                        plan.popular ? 'bg-primary text-primary-foreground hover:bg-primary/95' : 'variant-outline'
+                      className={`w-full py-5 rounded-xl text-sm font-bold ${
+                        plan.popular ? 'bg-orange-600 hover:bg-orange-700 text-white' : 'variant-outline'
                       }`}
                       variant={plan.popular ? 'default' : 'outline'}
                     >
@@ -333,12 +333,12 @@ export default function LandingPage() {
         {/* Testimonials */}
         <section className="py-20 border-t bg-background">
           <div className="container mx-auto px-4 max-w-4xl text-center">
-            <MessageSquare className="h-10 w-10 text-emerald-500/40 mx-auto mb-6" />
+            <MessageSquare className="h-10 w-10 text-orange-500/40 mx-auto mb-6" />
             <h2 className="text-2xl sm:text-3xl font-extrabold mb-8 italic">
               "Farmly completely revolutionized how we coordinate broiler vaccination and feed logs. We reduced feed losses by 18% in our first two months and employees always know exactly what tasks are pending."
             </h2>
             <div className="flex items-center justify-center space-x-3">
-              <div className="h-10 w-10 rounded-full bg-emerald-500/20 flex items-center justify-center font-bold text-emerald-600">
+              <div className="h-10 w-10 rounded-full bg-orange-500/20 flex items-center justify-center font-bold text-orange-600">
                 RV
               </div>
               <div className="text-left">
@@ -353,7 +353,7 @@ export default function LandingPage() {
         <footer id="contact" className="py-12 border-t bg-muted/40">
           <div className="container mx-auto px-4 max-w-6xl flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
             <div className="flex items-center space-x-2">
-              <div className="p-2 bg-emerald-500/10 rounded-lg text-primary">
+              <div className="p-2 bg-orange-500/10 rounded-lg text-primary">
                 <Sprout className="h-5 w-5" />
               </div>
               <span className="font-bold text-lg">Farmly</span>
