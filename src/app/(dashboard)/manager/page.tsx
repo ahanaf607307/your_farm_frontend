@@ -514,7 +514,7 @@ export default function FarmManagerPage() {
             <CardTitle className="text-xs text-muted-foreground">Feed Stock Balance</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
+            <div className="text-2xl font-bold font-mono text-orange-600 dark:text-orange-400">
               {foods.reduce((acc, cur) => acc + cur.stock, 0)} <span className="text-xs font-normal text-muted-foreground">kg</span>
             </div>
             <p className="text-[10px] text-muted-foreground mt-1">
@@ -532,7 +532,7 @@ export default function FarmManagerPage() {
               {tasks.filter(t => t.status === 'completed').length} / {tasks.length}
             </div>
             <div className="w-full bg-muted h-1.5 rounded-full mt-2 overflow-hidden">
-              <div className="bg-emerald-500 h-full" style={{ width: `${tasks.length ? (tasks.filter(t => t.status === 'completed').length / tasks.length) * 100 : 0}%` }} />
+              <div className="bg-orange-500 h-full" style={{ width: `${tasks.length ? (tasks.filter(t => t.status === 'completed').length / tasks.length) * 100 : 0}%` }} />
             </div>
           </CardContent>
         </Card>
@@ -630,7 +630,7 @@ export default function FarmManagerPage() {
                       <div className="font-bold">{inc.source}</div>
                       <div className="text-3xs text-muted-foreground font-mono mt-0.5">{inc.date}</div>
                     </div>
-                    <span className="font-mono font-semibold text-emerald-600 dark:text-emerald-400">
+                    <span className="font-mono font-semibold text-orange-600 dark:text-orange-400">
                       +{formatCurrency(inc.amount)}
                     </span>
                   </div>
@@ -720,7 +720,7 @@ export default function FarmManagerPage() {
             </div>
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => setCatModalOpen(false)}>Cancel</Button>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white">Save Category</Button>
+              <Button type="submit" className="bg-orange-600 hover:bg-orange-700 text-white">Save Category</Button>
             </DialogFooter>
           </form>
         </DialogContent>
@@ -813,7 +813,7 @@ export default function FarmManagerPage() {
             </div>
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => setAnimalModalOpen(false)}>Cancel</Button>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white">Save Livestock</Button>
+              <Button type="submit" className="bg-orange-600 hover:bg-orange-700 text-white">Save Livestock</Button>
             </DialogFooter>
           </form>
         </DialogContent>
@@ -923,7 +923,7 @@ export default function FarmManagerPage() {
             </div>
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => setMedModalOpen(false)}>Cancel</Button>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white">Configure Medicine</Button>
+              <Button type="submit" className="bg-orange-600 hover:bg-orange-700 text-white">Configure Medicine</Button>
             </DialogFooter>
           </form>
         </DialogContent>
@@ -1020,7 +1020,7 @@ export default function FarmManagerPage() {
             </div>
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => setFoodModalOpen(false)}>Cancel</Button>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white">Save Feed Item</Button>
+              <Button type="submit" className="bg-orange-600 hover:bg-orange-700 text-white">Save Feed Item</Button>
             </DialogFooter>
           </form>
         </DialogContent>
@@ -1094,7 +1094,7 @@ export default function FarmManagerPage() {
             </div>
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => setTaskModalOpen(false)}>Cancel</Button>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white">Dispatch Task</Button>
+              <Button type="submit" className="bg-orange-600 hover:bg-orange-700 text-white">Dispatch Task</Button>
             </DialogFooter>
           </form>
         </DialogContent>

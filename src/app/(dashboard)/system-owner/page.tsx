@@ -218,7 +218,7 @@ export default function SystemOwnerPage() {
       accessorKey: 'monthlyRevenue',
       sortable: true,
       render: (row: Business) => (
-        <span className="font-mono font-semibold text-emerald-600 dark:text-emerald-400">
+        <span className="font-mono font-semibold text-orange-600 dark:text-orange-400">
           {formatCurrency(row.monthlyRevenue)}
         </span>
       ),
@@ -254,7 +254,7 @@ export default function SystemOwnerPage() {
             {row.status === 'active' ? (
               <Pause className="h-3.5 w-3.5 text-amber-500 hover:text-amber-600" />
             ) : (
-              <Play className="h-3.5 w-3.5 text-emerald-500 hover:text-emerald-600" />
+              <Play className="h-3.5 w-3.5 text-orange-500 hover:text-orange-600" />
             )}
           </Button>
           <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => deleteMutation.mutate(row.id)}>
@@ -297,14 +297,14 @@ export default function SystemOwnerPage() {
         <Card className="border bg-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-xs font-medium text-muted-foreground">Monthly Gross Revenue</CardTitle>
-            <DollarSign className="h-4.5 w-4.5 text-emerald-500" />
+            <DollarSign className="h-4.5 w-4.5 text-orange-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
+            <div className="text-2xl font-bold font-mono text-orange-600 dark:text-orange-400">
               {formatCurrency(stats.revenue)}
             </div>
             <p className="text-[10px] text-muted-foreground mt-1 flex items-center gap-1">
-              <TrendingUp className="h-3.5 w-3.5 text-emerald-500" /> +14.2% from previous cycle
+              <TrendingUp className="h-3.5 w-3.5 text-orange-500" /> +14.2% from previous cycle
             </p>
           </CardContent>
         </Card>
@@ -317,7 +317,7 @@ export default function SystemOwnerPage() {
           <CardContent>
             <div className="text-2xl font-bold font-mono">{stats.registrations}</div>
             <p className="text-[10px] text-muted-foreground mt-1 flex items-center gap-1">
-              <TrendingUp className="h-3.5 w-3.5 text-emerald-500" /> +8.1% organic registrations
+              <TrendingUp className="h-3.5 w-3.5 text-orange-500" /> +8.1% organic registrations
             </p>
           </CardContent>
         </Card>
@@ -340,12 +340,12 @@ export default function SystemOwnerPage() {
         <Card className="border bg-card">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-xs font-medium text-muted-foreground">Subscriptions Conversion</CardTitle>
-            <TrendingUp className="h-4.5 w-4.5 text-emerald-500" />
+            <TrendingUp className="h-4.5 w-4.5 text-orange-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold font-mono">82%</div>
             <p className="text-[10px] text-muted-foreground mt-1 flex items-center gap-1">
-              <TrendingUp className="h-3.5 w-3.5 text-emerald-500" /> High conversion to Enterprise
+              <TrendingUp className="h-3.5 w-3.5 text-orange-500" /> High conversion to Enterprise
             </p>
           </CardContent>
         </Card>
@@ -365,7 +365,7 @@ export default function SystemOwnerPage() {
                   ${val}k
                 </div>
                 <div
-                  className="w-8/12 bg-gradient-to-t from-emerald-600 to-emerald-400 dark:from-emerald-700 dark:to-emerald-500 rounded-t-lg transition-all duration-300 group-hover:brightness-110 shadow-md shadow-emerald-500/10"
+                  className="w-8/12 bg-gradient-to-t from-orange-600 to-orange-400 dark:from-orange-700 dark:to-orange-500 rounded-t-lg transition-all duration-300 group-hover:brightness-110 shadow-md shadow-orange-500/10"
                   style={{ height: `${(val / 140) * 150}px` }}
                 />
                 <span className="text-[10px] text-zinc-500 mt-2 font-mono">Wk {i + 1}</span>
@@ -387,7 +387,7 @@ export default function SystemOwnerPage() {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="3.5"
-                className="drop-shadow-[0_4px_8px_rgba(16,185,129,0.3)]"
+                className="drop-shadow-[0_4px_8px_rgba(249,115,22,0.3)]"
               />
               {/* Highlight Dot */}
               <circle cx="500" cy="5" r="5" className="fill-primary stroke-white dark:stroke-zinc-950 stroke-2" />
@@ -482,7 +482,7 @@ export default function SystemOwnerPage() {
               <Button type="button" variant="outline" onClick={() => setCreateModalOpen(false)}>
                 Cancel
               </Button>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white">
+              <Button type="submit" className="bg-orange-600 hover:bg-orange-700 text-white">
                 Submit Registration
               </Button>
             </DialogFooter>
@@ -539,7 +539,7 @@ export default function SystemOwnerPage() {
               <Button type="button" variant="outline" onClick={() => setEditModalOpen(false)}>
                 Cancel
               </Button>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white">
+              <Button type="submit" className="bg-orange-600 hover:bg-orange-700 text-white">
                 Save Changes
               </Button>
             </DialogFooter>

@@ -97,7 +97,7 @@ export default function FarmEmployeePage() {
   const getTaskBadgeColor = (type: string) => {
     switch (type) {
       case 'feed':
-        return 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20';
+        return 'bg-orange-500/10 text-orange-600 border-orange-500/20';
       case 'medicine':
         return 'bg-amber-500/10 text-amber-600 border-amber-500/20';
       case 'vaccination':
@@ -141,10 +141,10 @@ export default function FarmEmployeePage() {
         <Card className="border bg-card">
           <CardHeader className="flex flex-row items-center justify-between pb-2 space-y-0">
             <CardTitle className="text-xs font-semibold text-muted-foreground">Completed Tasks</CardTitle>
-            <CheckCircle2 className="h-4.5 w-4.5 text-emerald-500" />
+            <CheckCircle2 className="h-4.5 w-4.5 text-orange-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold font-mono text-emerald-600 dark:text-emerald-400">
+            <div className="text-2xl font-bold font-mono text-orange-600 dark:text-orange-400">
               {completedTasks.length}
             </div>
             <p className="text-[10px] text-muted-foreground mt-1">
@@ -173,7 +173,7 @@ export default function FarmEmployeePage() {
       {activeTab === 'tasks' && (
         <div>
           <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4 flex items-center gap-2">
-            <ClipboardList className="h-4 w-4 text-emerald-500" /> Task Cards Checklist
+            <ClipboardList className="h-4 w-4 text-orange-500" /> Task Cards Checklist
           </h2>
           {isLoading ? (
             <div className="py-12 text-center text-xs text-zinc-400">Loading worksheets...</div>
@@ -230,7 +230,7 @@ export default function FarmEmployeePage() {
                             <Camera className="h-3 w-3 mr-1" /> Attach Live Photo
                           </Button>
                           {activeTaskImage[task.id] && (
-                            <span className="text-[10px] text-emerald-500 flex items-center gap-1 font-mono">
+                            <span className="text-[10px] text-orange-500 flex items-center gap-1 font-mono">
                               <ImageIcon className="h-3.5 w-3.5" /> attached.jpg
                             </span>
                           )}
@@ -253,7 +253,7 @@ export default function FarmEmployeePage() {
                     <Button
                       size="sm"
                       onClick={() => handleStatusChange(task.id, 'completed')}
-                      className="bg-emerald-600 hover:bg-emerald-700 text-white text-2xs h-8"
+                      className="bg-orange-600 hover:bg-orange-700 text-white text-2xs h-8"
                     >
                       <Check className="h-3.5 w-3.5 mr-1" /> Complete Task
                     </Button>
@@ -268,7 +268,7 @@ export default function FarmEmployeePage() {
       {activeTab === 'history' && (
         <div>
           <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4 flex items-center gap-2">
-            <History className="h-4 w-4 text-emerald-500" /> Completed Tasks History
+            <History className="h-4 w-4 text-orange-500" /> Completed Tasks History
           </h2>
           {completedTasks.length === 0 ? (
             <div className="border border-dashed py-16 text-center text-sm text-muted-foreground rounded-2xl bg-card">
@@ -277,7 +277,7 @@ export default function FarmEmployeePage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {completedTasks.map((task) => (
-                <Card key={task.id} className="border border-emerald-500/20 bg-emerald-500/2 dark:bg-emerald-500/1 flex flex-col justify-between">
+                <Card key={task.id} className="border border-orange-500/20 bg-orange-500/2 dark:bg-orange-500/1 flex flex-col justify-between">
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between">
                       <Badge variant="outline" className={cn('text-[9px] uppercase font-bold', getTaskBadgeColor(task.type))}>
@@ -321,7 +321,7 @@ export default function FarmEmployeePage() {
       {activeTab === 'settings' && (
         <div className="max-w-xl">
           <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4 flex items-center gap-2">
-            <Settings className="h-4 w-4 text-emerald-500" /> Account & Profile Settings
+            <Settings className="h-4 w-4 text-orange-500" /> Account & Profile Settings
           </h2>
           <Card className="border bg-card">
             <CardHeader>
@@ -356,7 +356,7 @@ export default function FarmEmployeePage() {
                   placeholder="Type new secure password"
                 />
               </div>
-              <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700 text-white w-full sm:w-auto pt-2 mt-4">
+              <Button type="submit" className="bg-orange-600 hover:bg-orange-700 text-white w-full sm:w-auto pt-2 mt-4">
                 Save Account Changes
               </Button>
             </form>
