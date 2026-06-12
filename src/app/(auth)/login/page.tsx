@@ -87,11 +87,11 @@ export default function LoginPage() {
       {/* Left panel: Info & Testimonial (Hidden on mobile) */}
       <div className="hidden lg:flex lg:col-span-5 bg-zinc-950 text-white p-12 flex-col justify-between relative overflow-hidden">
         {/* Glow */}
-        <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[350px] h-[350px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[350px] h-[350px] bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
         
         <div className="flex items-center space-x-2 z-10">
-          <Link href="/" className="flex items-center space-x-2 text-white hover:text-emerald-400 transition-colors">
-            <Sprout className="h-6 w-6 text-emerald-400" />
+          <Link href="/" className="flex items-center space-x-2 text-white hover:text-orange-400 transition-colors">
+            <Sprout className="h-6 w-6 text-orange-400" />
             <span className="font-extrabold text-xl tracking-tight">Farmly</span>
           </Link>
         </div>
@@ -109,7 +109,7 @@ export default function LoginPage() {
           <p className="italic text-zinc-400 text-xs">
             "We cut vaccine coordination errors down to zero and managed feed usage across multiple chicken categories effortlessly."
           </p>
-          <div className="mt-3 text-2xs font-semibold text-emerald-400">
+          <div className="mt-3 text-2xs font-semibold text-orange-400">
             David Carter — Farm Manager, Vance Poultry Division
           </div>
         </div>
@@ -155,7 +155,7 @@ export default function LoginPage() {
                     <Label htmlFor="password">Password</Label>
                     <Link
                       href="/forgot-password"
-                      className="text-xs text-emerald-600 dark:text-emerald-400 hover:underline"
+                      className="text-xs text-orange-600 dark:text-orange-400 hover:underline"
                     >
                       Forgot password?
                     </Link>
@@ -179,7 +179,7 @@ export default function LoginPage() {
                   <input
                     type="checkbox"
                     id="rememberMe"
-                    className="h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                    className="h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
                     {...register('rememberMe')}
                   />
                   <Label htmlFor="rememberMe" className="text-xs font-normal">
@@ -192,7 +192,7 @@ export default function LoginPage() {
                 <Button
                   type="submit"
                   disabled={submitting}
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-6 rounded-lg font-semibold text-sm shadow-md"
+                  className="w-full bg-orange-600 hover:bg-orange-700 text-white py-6 rounded-lg font-semibold text-sm shadow-md"
                 >
                   {submitting ? (
                     <>
@@ -207,7 +207,7 @@ export default function LoginPage() {
                   Don't have a registered business?{' '}
                   <Link
                     href="/register"
-                    className="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline"
+                    className="text-orange-600 dark:text-orange-400 font-semibold hover:underline"
                   >
                     Register Business
                   </Link>
@@ -217,8 +217,8 @@ export default function LoginPage() {
           </Card>
 
           {/* Quick-Fill Box for Testing */}
-          <div className="border border-emerald-500/20 bg-emerald-500/5 dark:bg-emerald-500/2 p-4 rounded-xl space-y-3">
-            <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 block">
+          <div className="border border-orange-500/20 bg-orange-500/5 dark:bg-orange-500/2 p-4 rounded-xl space-y-3">
+            <span className="text-xs font-semibold text-orange-600 dark:text-orange-400 block">
               Auto-Fill Demo Roles (Click to choose dashboard):
             </span>
             <div className="grid grid-cols-2 gap-2 text-2xs">
@@ -226,7 +226,7 @@ export default function LoginPage() {
                 variant="outline"
                 size="sm"
                 onClick={() => handleQuickFill('admin@farmly.com', 'System Owner')}
-                className="h-8 py-1 px-2 border-emerald-500/20 hover:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
+                className="h-8 py-1 px-2 border-orange-500/20 hover:bg-orange-500/10 text-orange-700 dark:text-orange-400"
               >
                 1. System Owner
               </Button>
@@ -234,7 +234,7 @@ export default function LoginPage() {
                 variant="outline"
                 size="sm"
                 onClick={() => handleQuickFill('robert@vancefarms.com', 'Business Owner')}
-                className="h-8 py-1 px-2 border-emerald-500/20 hover:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
+                className="h-8 py-1 px-2 border-orange-500/20 hover:bg-orange-500/10 text-orange-700 dark:text-orange-400"
               >
                 2. Business Owner
               </Button>
@@ -242,7 +242,7 @@ export default function LoginPage() {
                 variant="outline"
                 size="sm"
                 onClick={() => handleQuickFill('david@vancefarms.com', 'Farm Manager')}
-                className="h-8 py-1 px-2 border-emerald-500/20 hover:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
+                className="h-8 py-1 px-2 border-orange-500/20 hover:bg-orange-500/10 text-orange-700 dark:text-orange-400"
               >
                 3. Farm Manager
               </Button>
@@ -250,7 +250,7 @@ export default function LoginPage() {
                 variant="outline"
                 size="sm"
                 onClick={() => handleQuickFill('alex@vancefarms.com', 'Farm Employee')}
-                className="h-8 py-1 px-2 border-emerald-500/20 hover:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
+                className="h-8 py-1 px-2 border-orange-500/20 hover:bg-orange-500/10 text-orange-700 dark:text-orange-400"
               >
                 4. Farm Employee
               </Button>

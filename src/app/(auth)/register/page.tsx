@@ -74,11 +74,11 @@ export default function RegisterPage() {
     <div className="min-h-screen grid grid-cols-1 lg:grid-cols-12 bg-background">
       {/* Left panel */}
       <div className="hidden lg:flex lg:col-span-5 bg-zinc-950 text-white p-12 flex-col justify-between relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[350px] h-[350px] bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[350px] h-[350px] bg-orange-500/10 rounded-full blur-3xl pointer-events-none" />
         
         <div className="flex items-center space-x-2 z-10">
-          <Link href="/" className="flex items-center space-x-2 text-white hover:text-emerald-400 transition-colors">
-            <Sprout className="h-6 w-6 text-emerald-400" />
+          <Link href="/" className="flex items-center space-x-2 text-white hover:text-orange-400 transition-colors">
+            <Sprout className="h-6 w-6 text-orange-400" />
             <span className="font-extrabold text-xl tracking-tight">Farmly</span>
           </Link>
         </div>
@@ -96,7 +96,7 @@ export default function RegisterPage() {
           <p className="italic text-zinc-400 text-xs">
             "Setting up Vance Poultry stable details was a breeze. Highly recommended for expanding agricultural groups."
           </p>
-          <div className="mt-3 text-2xs font-semibold text-emerald-400">
+          <div className="mt-3 text-2xs font-semibold text-orange-400">
             Robert Vance — Managing Director, Vance Agricultural Group
           </div>
         </div>
@@ -191,16 +191,16 @@ export default function RegisterPage() {
                     <input
                       type="checkbox"
                       id="agreeTerms"
-                      className="h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                      className="h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-500"
                       {...register('agreeTerms')}
                     />
                     <Label htmlFor="agreeTerms" className="text-xs font-normal">
                       I agree to the{' '}
-                      <a href="#" className="text-emerald-600 hover:underline">
+                      <a href="#" className="text-orange-600 hover:underline">
                         Terms of Service
                       </a>{' '}
                       and{' '}
-                      <a href="#" className="text-emerald-600 hover:underline">
+                      <a href="#" className="text-orange-600 hover:underline">
                         Privacy Policy
                       </a>
                     </Label>
@@ -215,7 +215,7 @@ export default function RegisterPage() {
                 <Button
                   type="submit"
                   disabled={submitting}
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-6 rounded-lg font-semibold text-sm shadow-md"
+                  className="w-full bg-orange-600 hover:bg-orange-700 text-white py-6 rounded-lg font-semibold text-sm shadow-md"
                 >
                   {submitting ? (
                     <>
@@ -230,7 +230,7 @@ export default function RegisterPage() {
                   Already have an account?{' '}
                   <Link
                     href="/login"
-                    className="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline"
+                    className="text-orange-600 dark:text-orange-400 font-semibold hover:underline"
                   >
                     Sign In
                   </Link>
