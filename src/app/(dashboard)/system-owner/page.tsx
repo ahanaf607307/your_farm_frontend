@@ -472,9 +472,46 @@ export default function SystemOwnerPage() {
           {/* Pricing tiers */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { name: 'Basic Tier', price: '$49', desc: 'Perfect for small single-farm owners', farms: 'Up to 2 Farms' },
-              { name: 'Standard Tier', price: '$99', desc: 'Popular choice for expanding setups', farms: 'Up to 5 Farms', popular: true },
-              { name: 'Enterprise Tier', price: '$199', desc: 'Custom configuration for agriculture groups', farms: 'Unlimited Farms' },
+              {
+                name: 'Basic Tier',
+                price: '$49',
+                desc: 'Perfect for small single-farm owners',
+                features: [
+                  'Up to 2 Farms',
+                  'Livestock Registry & Categories',
+                  'Feed & Medication Tracker',
+                  'Employee Task Checklists'
+                ]
+              },
+              {
+                name: 'Standard Tier',
+                price: '$99',
+                desc: 'Popular choice for expanding setups',
+                popular: true,
+                features: [
+                  'Up to 5 Farms',
+                  'Livestock Registry & Categories',
+                  'Feed & Medication Tracker',
+                  'Employee Task Checklists',
+                  'CSV Import & Export Tools',
+                  'Real-time Alert Notifications'
+                ]
+              },
+              {
+                name: 'Enterprise Tier',
+                price: '$199',
+                desc: 'Custom configuration for agriculture groups',
+                features: [
+                  'Unlimited Farms',
+                  'Livestock Registry & Categories',
+                  'Feed & Medication Tracker',
+                  'Employee Task Checklists',
+                  'CSV Import & Export Tools',
+                  'Real-time Alert Notifications',
+                  'Internal Chat Messenger',
+                  '24/7 Priority Support Helpdesk'
+                ]
+              },
             ].map((plan, idx) => (
               <Card
                 key={idx}
@@ -495,14 +532,12 @@ export default function SystemOwnerPage() {
                     <span className="text-muted-foreground text-3xs ml-1">/month</span>
                   </div>
                   <ul className="space-y-2 text-[11px] text-muted-foreground border-t pt-4">
-                    <li className="flex items-center text-foreground font-semibold"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> {plan.farms}</li>
-                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> Livestock Registry & Categories</li>
-                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> Feed & Medication Tracker</li>
-                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> Employee Task Checklists</li>
-                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> CSV Import & Export Tools</li>
-                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> Real-time Alert Notifications</li>
-                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> Internal Chat Messenger</li>
-                    <li className="flex items-center"><Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" /> 24/7 Priority Support Helpdesk</li>
+                    {plan.features.map((feat, fIdx) => (
+                      <li key={fIdx} className={`flex items-center ${fIdx === 0 ? 'text-foreground font-semibold' : ''}`}>
+                        <Check className="h-3.5 w-3.5 text-primary mr-2 shrink-0" />
+                        {feat}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </Card>
