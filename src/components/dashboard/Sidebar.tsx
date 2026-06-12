@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useAppSelector, useAppDispatch } from '@/redux/hooks';
 import { toggleSidebar } from '@/redux/slices/uiSlice';
 import { cn } from '@/lib/utils';
@@ -29,6 +29,7 @@ import {
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
   const { sidebarExpanded } = useAppSelector((state) => state.ui);
   const { user } = useAppSelector((state) => state.auth);
@@ -103,7 +104,18 @@ export default function Sidebar() {
       <nav className="flex-1 px-3 py-4 space-y-1.5 overflow-y-auto">
         {menuItems.map((item, index) => {
           const Icon = item.icon;
-          const isActive = pathname === item.path.split('?')[0];
+          
+          // Compute if tab query param matches current search params
+          const itemPath = item.path;
+          const hasQuery = itemPath.includes('?');
+          const itemPathWithoutQuery = hasQuery ? itemPath.split('?')[0] : itemPath;
+          const itemQuery = hasQuery ? itemPath.split('?')[1] : '';
+          const itemParams = new URLSearchParams(itemQuery);
+          const itemTab = itemParams.get('tab') || '';
+          
+          const currentTab = searchParams.get('tab') || '';
+          const isActive = pathname === itemPathWithoutQuery && currentTab === itemTab;
+
           return (
             <Link
               key={index}
@@ -111,7 +123,7 @@ export default function Sidebar() {
               className={cn(
                 'flex items-center space-x-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all group relative',
                 isActive
-                  ? 'bg-orange-500/10 text-primary'
+                  ? 'bg-orange-500/10 text-primary font-semibold'
                   : 'text-muted-foreground hover:bg-accent hover:text-foreground'
               )}
             >
