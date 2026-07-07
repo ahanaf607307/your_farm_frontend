@@ -317,6 +317,26 @@ export default function FarmManagerPage() {
     },
   ];
 
+  const categoryColumns = [
+    {
+      header: 'Category Name',
+      accessorKey: 'name',
+      sortable: true,
+      render: (row: AnimalCategory) => <div className="font-bold">{row.name}</div>,
+    },
+    {
+      header: 'Description',
+      accessorKey: 'description',
+      render: (row: AnimalCategory) => <div className="text-zinc-500 text-xs">{row.description}</div>,
+    },
+    {
+      header: 'Animal Count',
+      accessorKey: 'animalCount',
+      sortable: true,
+      render: (row: AnimalCategory) => <Badge variant="outline" className="font-bold font-mono text-[10px]">{row.animalCount} head(s)</Badge>,
+    },
+  ];
+
   const medColumns = [
     {
       header: 'Medicine Name',
@@ -454,24 +474,26 @@ export default function FarmManagerPage() {
   return (
     <div className="space-y-6">
       {/* Title */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h1 className="text-3xl font-extrabold tracking-tight">Farm Operations Panel</h1>
-          <p className="text-sm text-muted-foreground mt-1">
-            Manage animal categories, medication logs, feed balances, and staff worksheets.
-          </p>
-        </div>
+      {activeTab !== 'settings' && (
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+          <div>
+            <h1 className="text-3xl font-extrabold tracking-tight">Farm Operations Panel</h1>
+            <p className="text-sm text-muted-foreground mt-1">
+              Manage animal categories, medication logs, feed balances, and staff worksheets.
+            </p>
+          </div>
 
-        {/* Action Widgets */}
-        <div className="flex space-x-2 shrink-0">
-          <Button variant="outline" size="sm" onClick={() => setCatModalOpen(true)} className="text-xs">
-            <Tag className="h-4 w-4 mr-1.5" /> New Category
-          </Button>
+          {/* Action Widgets */}
+          <div className="flex space-x-2 shrink-0">
+            <Button variant="outline" size="sm" onClick={() => setCatModalOpen(true)} className="text-xs">
+              <Tag className="h-4 w-4 mr-1.5" /> New Category
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Stock warning Banner */}
-      {lowStockCount > 0 && (
+      {activeTab !== 'settings' && lowStockCount > 0 && (
         <div className="bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-400 p-4 rounded-xl flex items-center space-x-3 text-xs leading-normal">
           <ShieldAlert className="h-5 w-5 text-amber-500 shrink-0" />
           <span>
@@ -481,64 +503,66 @@ export default function FarmManagerPage() {
       )}
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="border bg-card">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs text-muted-foreground">Livestock Census</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-mono">
-              {animals.reduce((acc, cur) => acc + cur.quantity, 0)}
-              <span className="text-xs text-muted-foreground ml-1">heads</span>
-            </div>
-            <p className="text-[10px] text-muted-foreground mt-1">
-              Distributed in {categories.length} categories
-            </p>
-          </CardContent>
-        </Card>
+      {activeTab !== 'settings' && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card className="border bg-card">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xs text-muted-foreground">Livestock Census</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold font-mono">
+                {animals.reduce((acc, cur) => acc + cur.quantity, 0)}
+                <span className="text-xs text-muted-foreground ml-1">heads</span>
+              </div>
+              <p className="text-[10px] text-muted-foreground mt-1">
+                Distributed in {categories.length} categories
+              </p>
+            </CardContent>
+          </Card>
 
-        <Card className="border bg-card">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs text-muted-foreground">Medicine Schedules</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-mono">
-              {medicines.length} <span className="text-xs text-muted-foreground">Types</span>
-            </div>
-            <p className="text-[10px] text-muted-foreground mt-1">
-              Active vaccine cycles in execution
-            </p>
-          </CardContent>
-        </Card>
+          <Card className="border bg-card">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xs text-muted-foreground">Medicine Schedules</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold font-mono">
+                {medicines.length} <span className="text-xs text-muted-foreground">Types</span>
+              </div>
+              <p className="text-[10px] text-muted-foreground mt-1">
+                Active vaccine cycles in execution
+              </p>
+            </CardContent>
+          </Card>
 
-        <Card className="border bg-card">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs text-muted-foreground">Feed Stock Balance</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-mono text-orange-600 dark:text-orange-400">
-              {foods.reduce((acc, cur) => acc + cur.stock, 0)} <span className="text-xs font-normal text-muted-foreground">kg</span>
-            </div>
-            <p className="text-[10px] text-muted-foreground mt-1">
-              Estimated coverage: 12 days
-            </p>
-          </CardContent>
-        </Card>
+          <Card className="border bg-card">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xs text-muted-foreground">Feed Stock Balance</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold font-mono text-orange-600 dark:text-orange-400">
+                {foods.reduce((acc, cur) => acc + cur.stock, 0)} <span className="text-xs font-normal text-muted-foreground">kg</span>
+              </div>
+              <p className="text-[10px] text-muted-foreground mt-1">
+                Estimated coverage: 12 days
+              </p>
+            </CardContent>
+          </Card>
 
-        <Card className="pb-2">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-xs text-muted-foreground">Today's Tasks Progress</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold font-mono">
-              {tasks.filter(t => t.status === 'completed').length} / {tasks.length}
-            </div>
-            <div className="w-full bg-muted h-1.5 rounded-full mt-2 overflow-hidden">
-              <div className="bg-orange-500 h-full" style={{ width: `${tasks.length ? (tasks.filter(t => t.status === 'completed').length / tasks.length) * 100 : 0}%` }} />
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+          <Card className="pb-2">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-xs text-muted-foreground">Today's Tasks Progress</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold font-mono">
+                {tasks.filter(t => t.status === 'completed').length} / {tasks.length}
+              </div>
+              <div className="w-full bg-muted h-1.5 rounded-full mt-2 overflow-hidden">
+                <div className="bg-orange-500 h-full" style={{ width: `${tasks.length ? (tasks.filter(t => t.status === 'completed').length / tasks.length) * 100 : 0}%` }} />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
       {/* Main Content Tabs */}
       <Tabs
@@ -570,6 +594,27 @@ export default function FarmManagerPage() {
                 onAddClick={() => setAnimalModalOpen(true)}
                 addLabel="Catalog Animal"
                 csvName="livestock-registry"
+              />
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Tab: Categories */}
+        <TabsContent value="categories">
+          <Card className="border bg-card">
+            <CardHeader className="pb-3">
+              <CardTitle className="text-sm font-semibold">Animal Categories</CardTitle>
+              <CardDescription>Configure animal groups, classification settings, and track populations.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <DataTable
+                columns={categoryColumns}
+                data={categories}
+                searchKey="name"
+                searchPlaceholder="Search categories..."
+                onAddClick={() => setCatModalOpen(true)}
+                addLabel="New Category"
+                csvName="animal-categories"
               />
             </CardContent>
           </Card>
@@ -617,8 +662,87 @@ export default function FarmManagerPage() {
           </Card>
         </TabsContent>
 
-        {/* Tab 4: Finances */}
+        {/* Tab 4: Stock Inventory */}
         <TabsContent value="inventory">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <Card className="border bg-card">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-semibold">Feed Stocks</CardTitle>
+                <CardDescription>Available quantities of animal feeds and grains.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <DataTable
+                  columns={[
+                    {
+                      header: 'Feed Item',
+                      accessorKey: 'name',
+                      sortable: true,
+                      render: (row: FoodItem) => <span className="font-bold">{row.name}</span>
+                    },
+                    {
+                      header: 'Stock Quantity',
+                      accessorKey: 'stock',
+                      sortable: true,
+                      render: (row: FoodItem) => <span className="font-mono">{row.stock} kg</span>
+                    },
+                    {
+                      header: 'Status',
+                      accessorKey: 'status',
+                      render: (row: FoodItem) => {
+                        const variant = row.status === 'available' ? 'success' : 'warning';
+                        return <Badge variant={variant} className="text-[10px]">{row.status.toUpperCase()}</Badge>;
+                      }
+                    }
+                  ]}
+                  data={foods}
+                  searchKey="name"
+                  searchPlaceholder="Search feeds..."
+                  csvName="feed-stocks"
+                />
+              </CardContent>
+            </Card>
+
+            <Card className="border bg-card">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-sm font-semibold">Medicine Stocks</CardTitle>
+                <CardDescription>Available medicine units and vaccines.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <DataTable
+                  columns={[
+                    {
+                      header: 'Medicine Name',
+                      accessorKey: 'name',
+                      sortable: true,
+                      render: (row: Medicine) => <span className="font-bold">{row.name}</span>
+                    },
+                    {
+                      header: 'Stock Level',
+                      accessorKey: 'remainingStock',
+                      sortable: true,
+                      render: (row: Medicine) => <span className="font-mono">{row.remainingStock} units</span>
+                    },
+                    {
+                      header: 'Status',
+                      accessorKey: 'status',
+                      render: (row: Medicine) => {
+                        const variant = row.status === 'available' ? 'success' : row.status === 'low_stock' ? 'warning' : 'destructive';
+                        return <Badge variant={variant} className="text-[10px]">{row.status.replace('_', ' ').toUpperCase()}</Badge>;
+                      }
+                    }
+                  ]}
+                  data={medicines}
+                  searchKey="name"
+                  searchPlaceholder="Search medicines..."
+                  csvName="medicine-stocks"
+                />
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
+
+        {/* Tab 5: Finances (Expenses & Income) */}
+        <TabsContent value="finances">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <Card className="border bg-card">
               <CardHeader>

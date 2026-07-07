@@ -58,12 +58,12 @@ export default function Sidebar() {
       case 'FARM_MANAGER':
         return [
           { label: 'Farm Overview', path: '/manager', icon: LayoutDashboard },
-          { label: 'Categories', path: '/manager?tab=animals', icon: Tags },
+          { label: 'Categories', path: '/manager?tab=categories', icon: Tags },
           { label: 'Animals Registry', path: '/manager?tab=animals', icon: Sprout },
           { label: 'Medicine Tracker', path: '/manager?tab=medicines', icon: Activity },
           { label: 'Food Schedule', path: '/manager?tab=foods', icon: ShoppingBag },
           { label: 'Stock Inventory', path: '/manager?tab=inventory', icon: Layers },
-          { label: 'Expenses & Income', path: '/manager?tab=inventory', icon: DollarSign },
+          { label: 'Expenses & Income', path: '/manager?tab=finances', icon: DollarSign },
           { label: 'Tasks Generator', path: '/manager?tab=tasks', icon: ClipboardList },
           { label: 'Settings', path: '/manager?tab=settings', icon: Settings },
         ];
