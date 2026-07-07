@@ -80,11 +80,11 @@ export default function Hero() {
                   {t('hero.getStarted')} <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <a href="#features" className="w-full sm:w-auto">
+              <Link href="/features" passHref className="w-full sm:w-auto">
                 <Button variant="outline" size="lg" className="w-full sm:w-auto border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 font-semibold px-8 py-6 text-base h-auto cursor-pointer">
                   {t('hero.explore')}
                 </Button>
-              </a>
+              </Link>
             </div>
             
             {/* Quick Indicators */}

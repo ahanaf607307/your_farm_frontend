@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Sprout, Sun, Moon, Globe } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
@@ -10,6 +11,15 @@ import { useLanguage } from '@/providers/LanguageProvider';
 export default function Header() {
   const { theme, setTheme } = useTheme();
   const { locale, setLocale, t } = useLanguage();
+  const pathname = usePathname();
+
+  const navLinks = [
+    { href: '/features', label: t('nav.features') },
+    { href: '/roles', label: t('nav.roles') },
+    { href: '/price-list', label: t('nav.pricing') },
+    { href: '/contact', label: t('nav.contact') },
+    { href: '/system-review', label: t('nav.systemReview') },
+  ];
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-background/85 backdrop-blur-md">
@@ -25,12 +35,23 @@ export default function Header() {
         </Link>
 
         {/* Navigation links */}
-        <nav className="hidden md:flex items-center space-x-8 text-sm font-medium text-muted-foreground">
-          <a href="#features" className="hover:text-foreground transition-colors">{t('nav.features')}</a>
-          <a href="#roles" className="hover:text-foreground transition-colors">{t('nav.roles')}</a>
-          <a href="#pricing" className="hover:text-foreground transition-colors">{t('nav.pricing')}</a>
-          <a href="#contact" className="hover:text-foreground transition-colors">{t('nav.contact')}</a>
-          <Link href="/system-review" className="hover:text-foreground transition-colors">{t('nav.systemReview')}</Link>
+        <nav className="hidden md:flex items-center space-x-8 text-sm font-medium">
+          {navLinks.map(({ href, label }) => {
+            const isActive = pathname === href;
+            return (
+              <Link
+                key={href}
+                href={href}
+                className={`transition-colors ${
+                  isActive
+                    ? 'text-orange-500 font-semibold'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {label}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Action Controls */}
